@@ -1,0 +1,6 @@
+name: ChaosPlugin
+description: Re-creates the GTA 5 chaos mod in minecraft
+version: ${project.version}
+author: Optic_Fusion1
+main: optic_fusion1.chaosplugin.ChaosPlugin
+api-version: 1.17

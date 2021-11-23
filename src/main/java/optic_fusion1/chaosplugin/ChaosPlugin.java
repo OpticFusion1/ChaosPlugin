@@ -4,9 +4,20 @@ import java.util.concurrent.ThreadLocalRandom;
 import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.effect.EffectManager;
 import optic_fusion1.chaosplugin.effect.TimedEffect;
+import optic_fusion1.chaosplugin.effect.impl.AnvilEffect;
+import optic_fusion1.chaosplugin.effect.impl.BedrockFeetEffect;
+import optic_fusion1.chaosplugin.effect.impl.BeefEffect;
+import optic_fusion1.chaosplugin.effect.impl.BlindnessEffect;
+import optic_fusion1.chaosplugin.effect.impl.ButterFingersEffect;
+import optic_fusion1.chaosplugin.effect.impl.ClearLagEffect;
 import optic_fusion1.chaosplugin.effect.impl.FakeCreeperEffect;
+import optic_fusion1.chaosplugin.effect.impl.FullHealthEffect;
+import optic_fusion1.chaosplugin.effect.impl.FullHungerEffect;
+import optic_fusion1.chaosplugin.effect.impl.GardenerEffect;
 import optic_fusion1.chaosplugin.effect.impl.GiveDiamondEffect;
 import optic_fusion1.chaosplugin.effect.impl.GiveDiamondItemsEffect;
+import optic_fusion1.chaosplugin.effect.impl.HalfHeartEffect;
+import optic_fusion1.chaosplugin.effect.impl.HasteEffect;
 import optic_fusion1.chaosplugin.effect.impl.IgniteEffect;
 import optic_fusion1.chaosplugin.effect.impl.LightningEffect;
 import optic_fusion1.chaosplugin.effect.impl.MiningFatigueEffect;
@@ -41,6 +52,9 @@ public class ChaosPlugin extends JavaPlugin {
   private void registerScheduler() {
     Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
       Bukkit.getOnlinePlayers().forEach(target -> {
+        if(target == null){
+          return;
+        }
         Effect effect = EFFECT_MANAGER.getRandomEffect();
         effect.activate(target);
         if(effect instanceof TimedEffect timedEffect){
@@ -71,6 +85,17 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new MiningFatigueEffect());
     registerEffect(new LightningEffect());
     registerEffect(new IgniteEffect());
+    registerEffect(new HasteEffect());
+    registerEffect(new HalfHeartEffect());
+    registerEffect(new GardenerEffect());
+    registerEffect(new FullHungerEffect());
+    registerEffect(new FullHealthEffect());
+    registerEffect(new ButterFingersEffect());
+    registerEffect(new ClearLagEffect());
+    registerEffect(new BlindnessEffect());
+    registerEffect(new BeefEffect());
+    registerEffect(new BedrockFeetEffect());
+    registerEffect(new AnvilEffect());
   }
 
   private void registerEffect(Effect effect) {

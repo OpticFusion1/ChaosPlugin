@@ -5,10 +5,10 @@ import optic_fusion1.chaosplugin.effect.Effect;
 import org.bukkit.TreeType;
 import org.bukkit.entity.Player;
 
-public class SummonTreeEffect extends Effect {
+public class SummonRandomTreeEffect extends Effect {
 
-  public SummonTreeEffect() {
-    super("SummonTreeEffect");
+  public SummonRandomTreeEffect() {
+    super("Summon Random Tree");
   }
 
   @Override

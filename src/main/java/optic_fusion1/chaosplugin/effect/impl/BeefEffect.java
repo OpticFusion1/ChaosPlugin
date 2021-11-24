@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 public class BeefEffect extends Effect {
 
   public BeefEffect() {
-    super("BeefEffect");
+    super("Beef");
   }
 
   @Override

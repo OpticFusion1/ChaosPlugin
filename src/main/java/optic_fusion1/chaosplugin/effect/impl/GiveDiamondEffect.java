@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 public class GiveDiamondEffect extends Effect {
 
   public GiveDiamondEffect() {
-    super("GiveDiamondEffect");
+    super("Give Diamond");
   }
 
   @Override

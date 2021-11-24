@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class NothingEffect extends Effect {
 
   public NothingEffect() {
-    super("NothingEffect");
+    super("Nothing");
   }
 
   @Override

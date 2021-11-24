@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class IgniteEffect extends Effect {
 
   public IgniteEffect() {
-    super("IgniteEffect");
+    super("Ignite");
   }
 
   @Override

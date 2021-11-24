@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class SummonAngryBeeEffect extends Effect {
 
   public SummonAngryBeeEffect() {
-    super("SummonAngryBeeEffect");
+    super("Summon Angry Bee");
   }
 
   @Override

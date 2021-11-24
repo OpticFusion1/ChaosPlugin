@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 public class HasteEffect extends TimedEffect {
 
   public HasteEffect() {
-    super("HasteEffect");
+    super("Haste");
   }
 
   @Override

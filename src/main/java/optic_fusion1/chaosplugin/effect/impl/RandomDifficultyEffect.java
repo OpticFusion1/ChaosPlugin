@@ -11,7 +11,7 @@ public class RandomDifficultyEffect extends TimedEffect {
   private Difficulty oldDifficulty;
 
   public RandomDifficultyEffect() {
-    super("RandomDifficultEffect");
+    super("Random Difficulty");
   }
 
   @Override

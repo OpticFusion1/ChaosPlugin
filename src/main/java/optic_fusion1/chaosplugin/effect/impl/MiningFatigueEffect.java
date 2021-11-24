@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 public class MiningFatigueEffect extends TimedEffect {
 
   public MiningFatigueEffect() {
-    super("MiningFatigueEffect");
+    super("Slooooow mining");
   }
 
   @Override

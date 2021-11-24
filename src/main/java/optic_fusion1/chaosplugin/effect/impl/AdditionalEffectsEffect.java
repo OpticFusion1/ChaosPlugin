@@ -10,13 +10,13 @@ public class AdditionalEffectsEffect extends Effect {
   private ChaosPlugin plugin;
 
   public AdditionalEffectsEffect(ChaosPlugin plugin) {
-    super("AdditionalEffectsEffect");
+    super("Combo Time");
     this.plugin = plugin;
   }
 
   @Override
   public void activate(Player player) {
-    for (int i = 0; i <= 2; i++) {
+    for (int i = 0; i <= 1; i++) {
       for (Player target : Bukkit.getOnlinePlayers()) {
         plugin.runRandomEffect(target);
       }

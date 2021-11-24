@@ -31,7 +31,7 @@ public class GardenerEffect extends Effect {
   }
 
   public GardenerEffect() {
-    super("GardenerEffect");
+    super("Gardener");
   }
 
   @Override

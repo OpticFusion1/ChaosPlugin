@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 public class BlindnessEffect extends TimedEffect {
 
   public BlindnessEffect() {
-    super("BlindnessEffect");
+    super("Blindness");
   }
 
   @Override

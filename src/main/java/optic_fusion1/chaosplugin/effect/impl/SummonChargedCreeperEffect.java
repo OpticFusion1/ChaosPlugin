@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class SummonChargedCreeperEffect extends Effect {
 
   public SummonChargedCreeperEffect() {
-    super("SummonChargedCreeperEffect");
+    super("Summon Charged Creeper");
   }
 
   @Override

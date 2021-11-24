@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class BedrockFeetEffect extends Effect {
 
   public BedrockFeetEffect() {
-    super("BedrockFeetEffect");
+    super("Bedrock Feet");
   }
 
   @Override

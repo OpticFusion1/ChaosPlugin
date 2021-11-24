@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 public class TripEffect extends Effect {
 
   public TripEffect() {
-    super("TripEffect");
+    super("Trip");
   }
 
   @Override

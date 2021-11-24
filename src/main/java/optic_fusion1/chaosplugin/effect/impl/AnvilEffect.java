@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class AnvilEffect extends Effect {
 
   public AnvilEffect() {
-    super("AnvilEffect");
+    super("Watch out");
   }
 
   @Override

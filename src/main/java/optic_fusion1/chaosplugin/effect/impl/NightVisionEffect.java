@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 public class NightVisionEffect extends TimedEffect {
 
   public NightVisionEffect() {
-    super("NightVisionEffect");
+    super("Night Vision");
   }
 
   @Override

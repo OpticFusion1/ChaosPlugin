@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class ButterFingersEffect extends Effect {
 
   public ButterFingersEffect() {
-    super("ButterFingersEffect");
+    super("Butter Fingers");
   }
 
   @Override
@@ -18,6 +18,7 @@ public class ButterFingersEffect extends Effect {
     if (itemStack != null && itemStack.getType() != Material.AIR) {
       Item droppedItem = player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
       droppedItem.setPickupDelay(100);
+      player.getInventory().remove(itemStack);
     }
   }
 

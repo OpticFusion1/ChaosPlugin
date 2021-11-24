@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class NiceXpEffect extends Effect {
 
   public NiceXpEffect() {
-    super("NiceXpEvent");
+    super("Heh. Nice.");
   }
 
   @Override

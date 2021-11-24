@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 public class JumpBoostEffect extends TimedEffect {
 
   public JumpBoostEffect() {
-    super("JumpBoostEffect");
+    super("Need a boost?");
   }
 
   @Override

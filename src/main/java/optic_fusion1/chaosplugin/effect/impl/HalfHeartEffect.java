@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class HalfHeartEffect extends Effect {
 
   public HalfHeartEffect() {
-    super("HalfHeartEffect");
+    super("Half a heart");
   }
 
   @Override

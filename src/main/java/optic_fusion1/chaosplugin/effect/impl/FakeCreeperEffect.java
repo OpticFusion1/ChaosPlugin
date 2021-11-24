@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class FakeCreeperEffect extends Effect {
 
   public FakeCreeperEffect() {
-    super("FakeCreeperEffect");
+    super("Fake Creeper");
   }
 
   @Override

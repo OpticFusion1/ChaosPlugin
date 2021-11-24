@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class FullHungerEffect extends Effect {
 
   public FullHungerEffect() {
-    super("FullHunger");
+    super("Full Hunger");
   }
 
   @Override

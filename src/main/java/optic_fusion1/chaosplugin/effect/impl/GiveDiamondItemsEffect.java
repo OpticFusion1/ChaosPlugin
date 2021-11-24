@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class GiveDiamondItemsEffect extends Effect {
 
   public GiveDiamondItemsEffect() {
-    super("GiveDiamondItemsEffect");
+    super("Give Diamond Items");
   }
 
   private static final EnumSet<Material> DIAMOND_MATERIALS = EnumSet.of(Material.DIAMOND_SWORD,

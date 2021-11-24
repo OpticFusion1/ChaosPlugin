@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class FullHealthEffect extends Effect {
 
   public FullHealthEffect() {
-    super("FullHealthEffect");
+    super("Full Health");
   }
 
   @Override

@@ -7,18 +7,18 @@ import org.bukkit.entity.Player;
 
 public class AdditionalEffectsEffect extends Effect {
 
-  private ChaosPlugin plugin;
+  private ChaosPlugin chaos;
 
-  public AdditionalEffectsEffect(ChaosPlugin plugin) {
+  public AdditionalEffectsEffect(ChaosPlugin chaos) {
     super("Combo Time");
-    this.plugin = plugin;
+    this.chaos = chaos;
   }
 
   @Override
   public void activate(Player player) {
     for (int i = 0; i <= 1; i++) {
       for (Player target : Bukkit.getOnlinePlayers()) {
-        plugin.runRandomEffect(target);
+        chaos.runRandomEffect(target);
       }
     }
   }

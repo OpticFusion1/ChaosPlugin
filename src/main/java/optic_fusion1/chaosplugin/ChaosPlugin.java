@@ -22,28 +22,36 @@ import optic_fusion1.chaosplugin.effect.impl.GiveDiamondEffect;
 import optic_fusion1.chaosplugin.effect.impl.GiveDiamondItemsEffect;
 import optic_fusion1.chaosplugin.effect.impl.HalfHeartEffect;
 import optic_fusion1.chaosplugin.effect.impl.HasteEffect;
+import optic_fusion1.chaosplugin.effect.impl.HeresJohnnyEffect;
 import optic_fusion1.chaosplugin.effect.impl.IgniteEffect;
+import optic_fusion1.chaosplugin.effect.impl.InvulnerablePlayerEffect;
+import optic_fusion1.chaosplugin.effect.impl.KillerBunnyEffect;
 import optic_fusion1.chaosplugin.effect.impl.LaunchPlayerEffect;
 import optic_fusion1.chaosplugin.effect.impl.LightningEffect;
 import optic_fusion1.chaosplugin.effect.impl.MiningFatigueEffect;
 import optic_fusion1.chaosplugin.effect.impl.NiceXpEffect;
 import optic_fusion1.chaosplugin.effect.impl.NightVisionEffect;
 import optic_fusion1.chaosplugin.effect.impl.NothingEffect;
+import optic_fusion1.chaosplugin.effect.impl.SetCurrentVehicleEffect;
 import optic_fusion1.chaosplugin.effect.impl.SkyLavaEffect;
 import optic_fusion1.chaosplugin.effect.impl.SkydiveEffect;
+import optic_fusion1.chaosplugin.effect.impl.SpawnRandomAnimalsEffect;
 import optic_fusion1.chaosplugin.effect.impl.SpeedEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonAngryBeeEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonChargedCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonRandomTreeEffect;
 import optic_fusion1.chaosplugin.effect.impl.TripEffect;
+import optic_fusion1.chaosplugin.effect.impl.WeaponGiverEffect;
 import optic_fusion1.chaosplugin.effect.impl.ZeroHungerEffect;
 import optic_fusion1.chaosplugin.effect.impl.ZeroXpEffect;
+import optic_fusion1.chaosplugin.listener.PlayerListener;
 import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChaosPlugin extends JavaPlugin {
@@ -58,10 +66,16 @@ public class ChaosPlugin extends JavaPlugin {
     effectManager = new EffectManager(this);
     registerEffects();
     registerScheduler();
+    registerListeners();
   }
 
   @Override
   public void onDisable() {
+  }
+    
+  private void registerListeners(){
+    PluginManager pluginManager = Bukkit.getPluginManager();
+    pluginManager.registerEvents(new PlayerListener(), this);
   }
 
   private void loadConfig(){
@@ -92,7 +106,12 @@ public class ChaosPlugin extends JavaPlugin {
     effect.activate(target);
     if(effect instanceof TimedEffect timedEffect){
       Bukkit.getScheduler().scheduleSyncDelayedTask(this, ()->{
-        target.sendMessage(Utils.colorize(prefix + effect.getName()));
+        String message = Utils.colorize(prefix + effect.getName());
+        if(effect.isGlobal()){
+          Bukkit.broadcastMessage(message);
+          return;
+        }
+        target.sendMessage(message);
         timedEffect.deactivate(target);
       }, ThreadLocalRandom.current().nextInt(30, 40 + 1) * 20);
     }
@@ -136,6 +155,12 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new AloneEffect(this));
     registerEffect(new ClearEffectsEffect());
     registerEffect(new LaunchPlayerEffect());
+    registerEffect(new WeaponGiverEffect());
+    registerEffect(new InvulnerablePlayerEffect());
+    registerEffect(new SpawnRandomAnimalsEffect());
+    registerEffect(new SetCurrentVehicleEffect());
+    registerEffect(new KillerBunnyEffect());
+    registerEffect(new HeresJohnnyEffect());
   }
 
   private void registerEffect(Effect effect) {

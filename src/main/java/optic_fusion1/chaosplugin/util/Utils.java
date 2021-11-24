@@ -1,8 +1,10 @@
 package optic_fusion1.chaosplugin.util;
 
-import com.google.gson.Gson;
+import static java.lang.Math.random;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.bukkit.Bukkit;
@@ -52,10 +54,17 @@ public final class Utils {
     }
   }
 
-  public static <E> Optional<E> getRandom(Collection<E> e) {
-    return e.stream()
-            .skip((int) (e.size() * Math.random()))
-            .findFirst();
+  public static <E> Optional<E> getRandomCollectionElement(Collection<E> e) {
+    return e.stream().skip((int) (e.size() * Math.random())).findFirst();
+  }
+
+  public static <E> E getRandomSetElement(Set<E> set) {
+    return set.stream().skip(new Random().nextInt(set.size())).findFirst().orElse(null);
+  }
+
+  public static Location getLocationInCircle(Location origin, Integer radius) {
+    double angle = random() * 360;
+    return origin.add(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
   }
 
 }

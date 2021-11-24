@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class ClearLagEffect extends Effect {
 
   public ClearLagEffect() {
-    super("Clear Lag");
+    super("Clear Lag", true);
   }
 
   @Override

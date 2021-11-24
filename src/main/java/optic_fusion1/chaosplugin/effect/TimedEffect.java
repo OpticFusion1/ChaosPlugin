@@ -8,6 +8,10 @@ public abstract class TimedEffect extends Effect {
     super(name);
   }
 
+  public TimedEffect(String name, boolean isGlobal) {
+    super(name, isGlobal);
+  }
+
   public abstract void deactivate(Player player);
 
 }

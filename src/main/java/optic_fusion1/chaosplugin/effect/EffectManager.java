@@ -47,11 +47,11 @@ public class EffectManager {
   }
 
   public Optional<Effect> getRandomEffect() {
-    return Utils.getRandom(ALL_EFFECTS.values());
+    return Utils.getRandomCollectionElement(ALL_EFFECTS.values());
   }
   
   public Optional<Effect> getRandomEnabledEffect() {
-    return Utils.getRandom(ENABLED_EFFECTS.values());
+    return Utils.getRandomCollectionElement(ENABLED_EFFECTS.values());
   }
 
 }

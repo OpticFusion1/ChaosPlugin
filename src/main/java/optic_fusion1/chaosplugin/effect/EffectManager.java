@@ -3,7 +3,9 @@ package optic_fusion1.chaosplugin.effect;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
+import optic_fusion1.chaosplugin.util.Utils;
 
 public class EffectManager {
 
@@ -22,10 +24,8 @@ public class EffectManager {
     return EFFECTS.get(name);
   }
 
-  public Effect getRandomEffect() {
-    Effect[] effects = (Effect[]) EFFECTS.values().toArray();
-    Effect effect = effects[RANDOM.nextInt(effects.length)];
-    return effect;
+  public Optional<Effect> getRandomEffect() {
+    return Utils.getRandom(EFFECTS.values());
   }
 
 }

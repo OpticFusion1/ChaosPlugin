@@ -1,5 +1,7 @@
 package optic_fusion1.chaosplugin.util;
 
+import java.util.Collection;
+import java.util.Optional;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -19,6 +21,12 @@ public final class Utils {
     for (ItemStack itemStack : itemStacks) {
       world.dropItemNaturally(location, itemStack);
     }
+  }
+
+  public static <E> Optional<E> getRandom(Collection<E> e) {
+    return e.stream()
+            .skip((int) (e.size() * Math.random()))
+            .findFirst();
   }
 
 }

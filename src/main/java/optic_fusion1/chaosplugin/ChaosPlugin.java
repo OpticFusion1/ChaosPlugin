@@ -1,11 +1,15 @@
 package optic_fusion1.chaosplugin;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.effect.EffectManager;
 import optic_fusion1.chaosplugin.effect.TimedEffect;
 import optic_fusion1.chaosplugin.effect.impl.AdditionalEffectsEffect;
+import optic_fusion1.chaosplugin.effect.impl.AllPlayersExitVehicleEffect;
 import optic_fusion1.chaosplugin.effect.impl.AloneEffect;
 import optic_fusion1.chaosplugin.effect.impl.AnvilEffect;
 import optic_fusion1.chaosplugin.effect.impl.BedrockFeetEffect;
@@ -24,6 +28,8 @@ import optic_fusion1.chaosplugin.effect.impl.HalfHeartEffect;
 import optic_fusion1.chaosplugin.effect.impl.HasteEffect;
 import optic_fusion1.chaosplugin.effect.impl.HeresJohnnyEffect;
 import optic_fusion1.chaosplugin.effect.impl.IgniteEffect;
+import optic_fusion1.chaosplugin.effect.impl.InvisibleEntitiesEffect;
+import optic_fusion1.chaosplugin.effect.impl.InvulnerableEntitiesEffect;
 import optic_fusion1.chaosplugin.effect.impl.InvulnerablePlayerEffect;
 import optic_fusion1.chaosplugin.effect.impl.KillerBunnyEffect;
 import optic_fusion1.chaosplugin.effect.impl.LaunchPlayerEffect;
@@ -45,6 +51,9 @@ import optic_fusion1.chaosplugin.effect.impl.TripEffect;
 import optic_fusion1.chaosplugin.effect.impl.WeaponGiverEffect;
 import optic_fusion1.chaosplugin.effect.impl.ZeroHungerEffect;
 import optic_fusion1.chaosplugin.effect.impl.ZeroXpEffect;
+import optic_fusion1.chaosplugin.effect.impl.pacifist.PacifistListener;
+import optic_fusion1.chaosplugin.effect.impl.vampirism.VampirismEffect;
+import optic_fusion1.chaosplugin.effect.impl.vampirism.VampirismEffectListener;
 import optic_fusion1.chaosplugin.listener.PlayerListener;
 import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.Bukkit;
@@ -59,6 +68,9 @@ public class ChaosPlugin extends JavaPlugin {
   private EffectManager effectManager;
   private FileConfiguration config;
   private String prefix;
+  private List<UUID> activeVampirism = new ArrayList<>();
+  private List<UUID> activePacifist = new ArrayList<>();
+  private InvisibleEntitiesEffect invisibleEntitiesEffect = new InvisibleEntitiesEffect();
 
   @Override
   public void onEnable() {
@@ -72,24 +84,27 @@ public class ChaosPlugin extends JavaPlugin {
   @Override
   public void onDisable() {
   }
-    
-  private void registerListeners(){
+
+  private void registerListeners() {
     PluginManager pluginManager = Bukkit.getPluginManager();
     pluginManager.registerEvents(new PlayerListener(), this);
+    pluginManager.registerEvents(new VampirismEffectListener(this), this);
+    pluginManager.registerEvents(new PacifistListener(this), this);
+    pluginManager.registerEvents(invisibleEntitiesEffect, this);
   }
 
-  private void loadConfig(){
-    if(!getDataFolder().exists()){
+  private void loadConfig() {
+    if (!getDataFolder().exists()) {
       getDataFolder().mkdirs();
     }
     File configFile = new File(getDataFolder(), "config.yml");
-    if(!configFile.exists()){
+    if (!configFile.exists()) {
       saveDefaultConfig();
     }
     config = YamlConfiguration.loadConfiguration(configFile);
     prefix = config.getString("prefix");
   }
-  
+
   private void registerScheduler() {
     Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
       Bukkit.getOnlinePlayers().forEach(target -> {
@@ -97,17 +112,17 @@ public class ChaosPlugin extends JavaPlugin {
       });
     }, 600, 600);
   }
-  
-  public void runRandomEffect(Player target){
-    if(target == null){
+
+  public void runRandomEffect(Player target) {
+    if (target == null) {
       return;
     }
     Effect effect = effectManager.getRandomEnabledEffect().get();
     effect.activate(target);
-    if(effect instanceof TimedEffect timedEffect){
-      Bukkit.getScheduler().scheduleSyncDelayedTask(this, ()->{
+    if (effect instanceof TimedEffect timedEffect) {
+      Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
         String message = Utils.colorize(prefix + effect.getName());
-        if(effect.isGlobal()){
+        if (effect.isGlobal()) {
           Bukkit.broadcastMessage(message);
           return;
         }
@@ -115,9 +130,9 @@ public class ChaosPlugin extends JavaPlugin {
         timedEffect.deactivate(target);
       }, ThreadLocalRandom.current().nextInt(30, 40 + 1) * 20);
     }
-    Bukkit.getScheduler().scheduleSyncDelayedTask(this, ()->{
-          target.sendMessage(Utils.colorize(prefix + effect.getName()));
-    },1);
+    Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
+      target.sendMessage(Utils.colorize(prefix + effect.getName()));
+    }, 1);
   }
 
   private void registerEffects() {
@@ -161,6 +176,11 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new SetCurrentVehicleEffect());
     registerEffect(new KillerBunnyEffect());
     registerEffect(new HeresJohnnyEffect());
+    registerEffect(new VampirismEffect(this));
+    registerEffect(new AllPlayersExitVehicleEffect());
+    registerEffect(new InvulnerableEntitiesEffect());
+    registerEffect(new InvisibleEntitiesEffect());
+    registerEffect(invisibleEntitiesEffect);
   }
 
   private void registerEffect(Effect effect) {
@@ -170,10 +190,34 @@ public class ChaosPlugin extends JavaPlugin {
   public EffectManager getEffectManager() {
     return effectManager;
   }
-  
+
   @Override
-  public FileConfiguration getConfig(){
+  public FileConfiguration getConfig() {
     return config;
+  }
+
+  public void addToActiveVampirism(Player player) {
+    activeVampirism.add(player.getUniqueId());
+  }
+
+  public void removeFromActiveVampirism(Player player) {
+    activeVampirism.remove(player.getUniqueId());
+  }
+
+  public boolean isVampirismEffectEnabledForPlayer(Player player) {
+    return activeVampirism.contains(player.getUniqueId());
+  }
+
+  public void addToActivePacifist(Player player) {
+    activePacifist.add(player.getUniqueId());
+  }
+
+  public void removeFromActivePacifist(Player player) {
+    activePacifist.remove(player.getUniqueId());
+  }
+
+  public boolean isPacifistEffectEnabledForPlayer(Player player) {
+    return activePacifist.contains(player.getUniqueId());
   }
 
 }

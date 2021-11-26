@@ -6,7 +6,6 @@ import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Cat;
@@ -33,11 +32,11 @@ public class SpawnRandomAnimalsEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    Location location = player.getLocation();
-    World world = location.getWorld();
     for (int i = 0; i <= 10; i++) {
+      Location location = Utils.getLocationInCircle(player.getLocation(), 10);
+      location.setY(location.getWorld().getHighestBlockYAt(location) + 1);
       EntityType entityType = Utils.getRandomSetElement(ENTITY_TYPES);
-      LivingEntity entity = (LivingEntity) world.spawnEntity(location, entityType);
+      LivingEntity entity = (LivingEntity) location.getWorld().spawnEntity(location, entityType);
       if (entity instanceof Ageable ageable) {
         randomizeAge(ageable);
       }
@@ -52,42 +51,42 @@ public class SpawnRandomAnimalsEffect extends Effect {
         continue;
       }
 
-      if(entityType == EntityType.MUSHROOM_COW) {
+      if (entityType == EntityType.MUSHROOM_COW) {
         MushroomCow cow = (MushroomCow) entity;
         randomizeMushroomCow(cow);
         continue;
       }
-      if(entityType == EntityType.FOX) {
+      if (entityType == EntityType.FOX) {
         Fox fox = (Fox) entity;
         randomizeFox(fox);
       }
     }
   }
-   
-  private void randomizeSheep(Sheep sheep){
+
+  private void randomizeSheep(Sheep sheep) {
     Random random = new Random();
     DyeColor color = DyeColor.values()[random.nextInt(DyeColor.values().length)];
     sheep.setColor(color);
     sheep.setSheared(random.nextInt(2) == 1);
   }
-  
-  private void randomizeFox(Fox fox){
+
+  private void randomizeFox(Fox fox) {
     Random random = new Random();
     fox.setFoxType(Fox.Type.values()[random.nextInt(Fox.Type.values().length)]);
   }
-  
-  private void randomizeMushroomCow(MushroomCow cow){
+
+  private void randomizeMushroomCow(MushroomCow cow) {
     Random random = new Random();
     cow.setVariant(MushroomCow.Variant.values()[random.nextInt(MushroomCow.Variant.values().length)]);
   }
-    
-  private void randomizeAge(Ageable entity){
+
+  private void randomizeAge(Ageable entity) {
     Random random = new Random();
     if (random.nextInt(2) == 1) {
       entity.setAdult();
     } else {
       entity.setBaby();
-    }  
+    }
   }
 
   private void randomizeCat(Cat cat) {

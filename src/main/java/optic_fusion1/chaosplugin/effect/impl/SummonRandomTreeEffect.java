@@ -13,7 +13,7 @@ public class SummonRandomTreeEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    player.getWorld().generateTree(player.getLocation(), TreeType.values()[ThreadLocalRandom.current().nextInt(TreeType.values().length)]);
+    player.getWorld().generateTree(player.getTargetBlock(null, 10).getLocation(), TreeType.values()[ThreadLocalRandom.current().nextInt(TreeType.values().length)]);
   }
 
 }

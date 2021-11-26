@@ -13,7 +13,7 @@ public class LightningEffect extends Effect {
   
   public LightningEffect(ChaosPlugin plugin) {
     super("Lightning");
-    this.chaos = chaos;
+    this.chaos = plugin;
   }
 
   @Override

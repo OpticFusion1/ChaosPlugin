@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class SpeedEffect extends TimedEffect {
+public class GottaGoFastEffect extends TimedEffect {
 
-  public SpeedEffect() {
+  public GottaGoFastEffect() {
     super("Gotta go fast");
   }
 

@@ -4,10 +4,10 @@ import optic_fusion1.chaosplugin.effect.Effect;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
-public class ClearEffectsEffect extends Effect {
+public class ClearPotionEffectsEffect extends Effect {
 
-  public ClearEffectsEffect() {
-    super("Clear Effects");
+  public ClearPotionEffectsEffect() {
+    super("Clear Potion Effects");
   }
 
   @Override

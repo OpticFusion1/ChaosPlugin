@@ -5,11 +5,11 @@ import optic_fusion1.chaosplugin.effect.Effect;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class AdditionalEffectsEffect extends Effect {
+public class ComboTimeEffect extends Effect {
 
   private ChaosPlugin chaos;
 
-  public AdditionalEffectsEffect(ChaosPlugin chaos) {
+  public ComboTimeEffect(ChaosPlugin chaos) {
     super("Combo Time");
     this.chaos = chaos;
   }

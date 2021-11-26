@@ -4,9 +4,9 @@ import optic_fusion1.chaosplugin.effect.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class AnvilEffect extends Effect {
+public class WatchOutEffect extends Effect {
 
-  public AnvilEffect() {
+  public WatchOutEffect() {
     super("Watch out");
   }
 

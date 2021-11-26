@@ -3,9 +3,9 @@ package optic_fusion1.chaosplugin.effect.impl;
 import optic_fusion1.chaosplugin.effect.Effect;
 import org.bukkit.entity.Player;
 
-public class SkydiveEffect extends Effect {
+public class HeavenEffect extends Effect {
 
-  public SkydiveEffect() {
+  public HeavenEffect() {
     super("Heaven");
   }
 

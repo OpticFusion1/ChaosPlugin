@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class InvisibleEntitiesEffect extends TimedEffect implements Listener {
 
@@ -27,11 +28,19 @@ public class InvisibleEntitiesEffect extends TimedEffect implements Listener {
 
   @Override
   public void activate(Player player) {
-    for (Entity entity : player.getWorld().getEntities()) {
+    for (Entity entity : player.getWorld().getLivingEntities()) {
       if (entity instanceof LivingEntity livingEntity) {
         livingEntity.setInvisible(true);
         invisibleEntities.add(livingEntity);
       }
+    }
+  }
+
+  @EventHandler
+  public void on(PlayerQuitEvent event) {
+    if (invisibleEntities.contains(event.getPlayer())) {
+      event.getPlayer().setInvisible(false);
+      invisibleEntities.remove(event.getPlayer());
     }
   }
 

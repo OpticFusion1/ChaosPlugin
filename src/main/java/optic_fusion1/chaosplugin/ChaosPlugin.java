@@ -4,19 +4,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.effect.EffectManager;
 import optic_fusion1.chaosplugin.effect.TimedEffect;
-import optic_fusion1.chaosplugin.effect.impl.AdditionalEffectsEffect;
+import optic_fusion1.chaosplugin.effect.impl.ComboTimeEffect;
 import optic_fusion1.chaosplugin.effect.impl.AllPlayersExitVehicleEffect;
-import optic_fusion1.chaosplugin.effect.impl.AloneEffect;
-import optic_fusion1.chaosplugin.effect.impl.AnvilEffect;
+import optic_fusion1.chaosplugin.effect.impl.WhereDidEverybodyGoEffect;
+import optic_fusion1.chaosplugin.effect.impl.WatchOutEffect;
 import optic_fusion1.chaosplugin.effect.impl.BedrockFeetEffect;
 import optic_fusion1.chaosplugin.effect.impl.BeefEffect;
 import optic_fusion1.chaosplugin.effect.impl.BlindnessEffect;
 import optic_fusion1.chaosplugin.effect.impl.ButterFingersEffect;
-import optic_fusion1.chaosplugin.effect.impl.ClearEffectsEffect;
+import optic_fusion1.chaosplugin.effect.impl.ClearPotionEffectsEffect;
 import optic_fusion1.chaosplugin.effect.impl.ClearLagEffect;
 import optic_fusion1.chaosplugin.effect.impl.FakeCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.FullHealthEffect;
@@ -40,9 +39,10 @@ import optic_fusion1.chaosplugin.effect.impl.NightVisionEffect;
 import optic_fusion1.chaosplugin.effect.impl.NothingEffect;
 import optic_fusion1.chaosplugin.effect.impl.SetCurrentVehicleEffect;
 import optic_fusion1.chaosplugin.effect.impl.SkyLavaEffect;
-import optic_fusion1.chaosplugin.effect.impl.SkydiveEffect;
+import optic_fusion1.chaosplugin.effect.impl.HeavenEffect;
 import optic_fusion1.chaosplugin.effect.impl.SpawnRandomAnimalsEffect;
-import optic_fusion1.chaosplugin.effect.impl.SpeedEffect;
+import optic_fusion1.chaosplugin.effect.impl.GottaGoFastEffect;
+import optic_fusion1.chaosplugin.effect.impl.LaunchAllEntitiesEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonAngryBeeEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonChargedCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonCreeperEffect;
@@ -110,7 +110,7 @@ public class ChaosPlugin extends JavaPlugin {
       Bukkit.getOnlinePlayers().forEach(target -> {
         runRandomEffect(target);
       });
-    }, 600, 600);
+    }, 30 * 20, 30 * 20);
   }
 
   public void runRandomEffect(Player target) {
@@ -128,7 +128,7 @@ public class ChaosPlugin extends JavaPlugin {
         }
         target.sendMessage(message);
         timedEffect.deactivate(target);
-      }, ThreadLocalRandom.current().nextInt(30, 40 + 1) * 20);
+      }, 90 * 20);
     }
     Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
       target.sendMessage(Utils.colorize(prefix + effect.getName()));
@@ -146,9 +146,9 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new TripEffect());
     registerEffect(new ZeroHungerEffect());
     registerEffect(new SummonRandomTreeEffect());
-    registerEffect(new SpeedEffect());
+    registerEffect(new GottaGoFastEffect());
     registerEffect(new SkyLavaEffect());
-    registerEffect(new SkydiveEffect());
+    registerEffect(new HeavenEffect());
     registerEffect(new NiceXpEffect());
     registerEffect(new MiningFatigueEffect());
     registerEffect(new LightningEffect(this));
@@ -163,12 +163,12 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new BlindnessEffect());
     registerEffect(new BeefEffect());
     registerEffect(new BedrockFeetEffect());
-    registerEffect(new AnvilEffect());
-    registerEffect(new AdditionalEffectsEffect(this));
+    registerEffect(new WatchOutEffect());
+    registerEffect(new ComboTimeEffect(this));
     registerEffect(new NightVisionEffect());
     registerEffect(new NothingEffect());
-    registerEffect(new AloneEffect(this));
-    registerEffect(new ClearEffectsEffect());
+    registerEffect(new WhereDidEverybodyGoEffect(this));
+    registerEffect(new ClearPotionEffectsEffect());
     registerEffect(new LaunchPlayerEffect());
     registerEffect(new WeaponGiverEffect());
     registerEffect(new InvulnerablePlayerEffect());
@@ -181,6 +181,7 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new InvulnerableEntitiesEffect());
     registerEffect(new InvisibleEntitiesEffect());
     registerEffect(invisibleEntitiesEffect);
+    registerEffect(new LaunchAllEntitiesEffect());
   }
 
   private void registerEffect(Effect effect) {

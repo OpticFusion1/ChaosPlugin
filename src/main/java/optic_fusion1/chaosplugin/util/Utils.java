@@ -12,7 +12,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public final class Utils {
 
@@ -65,6 +67,14 @@ public final class Utils {
   public static Location getLocationInCircle(Location origin, Integer radius) {
     double angle = random() * 360;
     return origin.add(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
+  }
+
+  public static void launchEntity(Entity entity) {
+    Location location = entity.getLocation();
+    location.setPitch(-90);
+    entity.teleport(location);
+    Vector direction = location.getDirection();
+    entity.setVelocity(direction.multiply(50.0));
   }
 
 }

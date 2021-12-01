@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 public class GottaGoFastEffect extends TimedEffect {
 
   public GottaGoFastEffect() {
-    super("Gotta go fast");
+    super("Gotta Go Fast");
   }
 
   @Override

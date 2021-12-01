@@ -10,7 +10,7 @@ public class WhereDidEverybodyGoEffect extends TimedEffect {
   private ChaosPlugin chaos;
 
   public WhereDidEverybodyGoEffect(ChaosPlugin chaos) {
-    super("Where did everybody go?");
+    super("Where Did Everybody Go?");
     this.chaos = chaos;
   }
 

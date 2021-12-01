@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class WatchOutEffect extends Effect {
 
   public WatchOutEffect() {
-    super("Watch out");
+    super("Watch Out");
   }
 
   @Override

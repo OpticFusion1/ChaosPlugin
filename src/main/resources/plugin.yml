@@ -3,4 +3,4 @@ description: Recreates the chaos mod in minecraft
 version: ${project.version}
 author: Optic_Fusion1
 main: optic_fusion1.chaosplugin.ChaosPlugin
-api-version: 1.17
+api-version: 1.18

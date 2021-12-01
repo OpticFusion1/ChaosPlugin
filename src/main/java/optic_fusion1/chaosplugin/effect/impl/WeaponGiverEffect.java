@@ -33,9 +33,9 @@ public class WeaponGiverEffect extends Effect {
   public void activate(Player player) {
     Location location = player.getLocation();
     World world = location.getWorld();
-    for (ItemStack itemStack : ITEMS) {
+    ITEMS.forEach(itemStack -> {
       world.dropItemNaturally(location, itemStack);
-    }
+    });
   }
 
 }

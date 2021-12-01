@@ -13,7 +13,6 @@ import optic_fusion1.chaosplugin.effect.impl.WhereDidEverybodyGoEffect;
 import optic_fusion1.chaosplugin.effect.impl.WatchOutEffect;
 import optic_fusion1.chaosplugin.effect.impl.BedrockFeetEffect;
 import optic_fusion1.chaosplugin.effect.impl.BeefEffect;
-import optic_fusion1.chaosplugin.effect.impl.BlindnessEffect;
 import optic_fusion1.chaosplugin.effect.impl.ButterFingersEffect;
 import optic_fusion1.chaosplugin.effect.impl.ClearPotionEffectsEffect;
 import optic_fusion1.chaosplugin.effect.impl.ClearLagEffect;
@@ -24,7 +23,6 @@ import optic_fusion1.chaosplugin.effect.impl.GardenerEffect;
 import optic_fusion1.chaosplugin.effect.impl.GiveDiamondEffect;
 import optic_fusion1.chaosplugin.effect.impl.GiveDiamondItemsEffect;
 import optic_fusion1.chaosplugin.effect.impl.HalfHeartEffect;
-import optic_fusion1.chaosplugin.effect.impl.HasteEffect;
 import optic_fusion1.chaosplugin.effect.impl.HeresJohnnyEffect;
 import optic_fusion1.chaosplugin.effect.impl.IgniteEffect;
 import optic_fusion1.chaosplugin.effect.impl.InvisibleEntitiesEffect;
@@ -33,9 +31,7 @@ import optic_fusion1.chaosplugin.effect.impl.InvulnerablePlayerEffect;
 import optic_fusion1.chaosplugin.effect.impl.KillerBunnyEffect;
 import optic_fusion1.chaosplugin.effect.impl.LaunchPlayerEffect;
 import optic_fusion1.chaosplugin.effect.impl.LightningEffect;
-import optic_fusion1.chaosplugin.effect.impl.MiningFatigueEffect;
-import optic_fusion1.chaosplugin.effect.impl.NiceXpEffect;
-import optic_fusion1.chaosplugin.effect.impl.NightVisionEffect;
+import optic_fusion1.chaosplugin.effect.impl.NiceExpEffect;
 import optic_fusion1.chaosplugin.effect.impl.NothingEffect;
 import optic_fusion1.chaosplugin.effect.impl.SetCurrentVehicleEffect;
 import optic_fusion1.chaosplugin.effect.impl.SkyLavaEffect;
@@ -50,11 +46,16 @@ import optic_fusion1.chaosplugin.effect.impl.SummonRandomTreeEffect;
 import optic_fusion1.chaosplugin.effect.impl.TripEffect;
 import optic_fusion1.chaosplugin.effect.impl.WeaponGiverEffect;
 import optic_fusion1.chaosplugin.effect.impl.ZeroHungerEffect;
-import optic_fusion1.chaosplugin.effect.impl.ZeroXpEffect;
+import optic_fusion1.chaosplugin.effect.impl.ZeroExpEffect;
 import optic_fusion1.chaosplugin.effect.impl.pacifist.PacifistListener;
+import optic_fusion1.chaosplugin.effect.impl.potioneffect.BlindnessEffect;
+import optic_fusion1.chaosplugin.effect.impl.potioneffect.HasteEffect;
+import optic_fusion1.chaosplugin.effect.impl.potioneffect.MiningFatigueEffect;
+import optic_fusion1.chaosplugin.effect.impl.potioneffect.NightVisionEffect;
 import optic_fusion1.chaosplugin.effect.impl.vampirism.VampirismEffect;
 import optic_fusion1.chaosplugin.effect.impl.vampirism.VampirismEffectListener;
 import optic_fusion1.chaosplugin.listener.PlayerListener;
+import optic_fusion1.chaosplugin.util.BossBarCountdown;
 import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -71,14 +72,19 @@ public class ChaosPlugin extends JavaPlugin {
   private List<UUID> activeVampirism = new ArrayList<>();
   private List<UUID> activePacifist = new ArrayList<>();
   private InvisibleEntitiesEffect invisibleEntitiesEffect = new InvisibleEntitiesEffect();
+  private BossBarCountdown effectCountdown = new BossBarCountdown("Effect Countdown", 30, this).setRunnable(() -> {
+    Bukkit.getOnlinePlayers().forEach(target -> {
+      runRandomEffect(target);
+    });
+  });
 
   @Override
   public void onEnable() {
     loadConfig();
     effectManager = new EffectManager(this);
     registerEffects();
-    registerScheduler();
     registerListeners();
+    effectCountdown.run();
   }
 
   @Override
@@ -87,7 +93,7 @@ public class ChaosPlugin extends JavaPlugin {
 
   private void registerListeners() {
     PluginManager pluginManager = Bukkit.getPluginManager();
-    pluginManager.registerEvents(new PlayerListener(), this);
+    pluginManager.registerEvents(new PlayerListener(this), this);
     pluginManager.registerEvents(new VampirismEffectListener(this), this);
     pluginManager.registerEvents(new PacifistListener(this), this);
     pluginManager.registerEvents(invisibleEntitiesEffect, this);
@@ -105,14 +111,6 @@ public class ChaosPlugin extends JavaPlugin {
     prefix = config.getString("prefix");
   }
 
-  private void registerScheduler() {
-    Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-      Bukkit.getOnlinePlayers().forEach(target -> {
-        runRandomEffect(target);
-      });
-    }, 30 * 20, 30 * 20);
-  }
-
   public void runRandomEffect(Player target) {
     if (target == null) {
       return;
@@ -120,16 +118,22 @@ public class ChaosPlugin extends JavaPlugin {
     Effect effect = effectManager.getRandomEnabledEffect().get();
     effect.activate(target);
     if (effect instanceof TimedEffect timedEffect) {
-      Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
-        String message = Utils.colorize(prefix + effect.getName());
-        if (effect.isGlobal()) {
-          Bukkit.broadcastMessage(message);
-          return;
-        }
-        target.sendMessage(message);
+      BossBarCountdown countdown = new BossBarCountdown(effect.getName(), 90, this, true).setRunnable(() -> {
         timedEffect.deactivate(target);
-      }, 90 * 20);
+      });
+      
+      if (timedEffect.isGlobal()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+          countdown.addPlayer(player);
+        }
+        countdown.run();
+        return;
+      }
+      countdown.addPlayer(target);
+      countdown.run();
+      return;
     }
+
     Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
       target.sendMessage(Utils.colorize(prefix + effect.getName()));
     }, 1);
@@ -141,7 +145,7 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new SummonAngryBeeEffect());
     registerEffect(new SummonCreeperEffect());
     registerEffect(new SummonChargedCreeperEffect());
-    registerEffect(new ZeroXpEffect());
+    registerEffect(new ZeroExpEffect());
     registerEffect(new FakeCreeperEffect());
     registerEffect(new TripEffect());
     registerEffect(new ZeroHungerEffect());
@@ -149,23 +153,23 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new GottaGoFastEffect());
     registerEffect(new SkyLavaEffect());
     registerEffect(new HeavenEffect());
-    registerEffect(new NiceXpEffect());
-    registerEffect(new MiningFatigueEffect());
+    registerEffect(new NiceExpEffect());
+    registerEffect(new MiningFatigueEffect(this));
     registerEffect(new LightningEffect(this));
     registerEffect(new IgniteEffect());
-    registerEffect(new HasteEffect());
+    registerEffect(new HasteEffect(this));
     registerEffect(new HalfHeartEffect());
     registerEffect(new GardenerEffect());
     registerEffect(new FullHungerEffect());
     registerEffect(new FullHealthEffect());
     registerEffect(new ButterFingersEffect());
     registerEffect(new ClearLagEffect());
-    registerEffect(new BlindnessEffect());
+    registerEffect(new BlindnessEffect(this));
     registerEffect(new BeefEffect());
     registerEffect(new BedrockFeetEffect());
     registerEffect(new WatchOutEffect());
     registerEffect(new ComboTimeEffect(this));
-    registerEffect(new NightVisionEffect());
+    registerEffect(new NightVisionEffect(this));
     registerEffect(new NothingEffect());
     registerEffect(new WhereDidEverybodyGoEffect(this));
     registerEffect(new ClearPotionEffectsEffect());
@@ -219,6 +223,10 @@ public class ChaosPlugin extends JavaPlugin {
 
   public boolean isPacifistEffectEnabledForPlayer(Player player) {
     return activePacifist.contains(player.getUniqueId());
+  }
+
+  public BossBarCountdown getEffectCountdownBossBar() {
+    return effectCountdown;
   }
 
 }

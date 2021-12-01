@@ -4,12 +4,14 @@ import java.util.EnumSet;
 import java.util.Random;
 import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.util.Utils;
+import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.Boat;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class SetCurrentVehicleEffect extends Effect {
 
@@ -24,7 +26,7 @@ public class SetCurrentVehicleEffect extends Effect {
   @Override
   public void activate(Player player) {
     EntityType entityType = Utils.getRandomSetElement(VEHICLES);
-    LivingEntity entity = (LivingEntity) player.getWorld().spawnEntity(player.getLocation(), entityType);
+    Entity entity = (Entity) player.getWorld().spawnEntity(player.getLocation(), entityType);
     if (player.isInsideVehicle()) {
       player.eject();
       player.getVehicle().remove();
@@ -34,13 +36,13 @@ public class SetCurrentVehicleEffect extends Effect {
       horse.setOwner(player);
       horse.setTamed(true);
       horse.addPassenger(player);
+      horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
       return;
     }
     if(entity instanceof Boat boat) {
       Random random = new Random();
       boat.setWoodType(TreeSpecies.values()[random.nextInt(TreeSpecies.values().length)]);
       boat.addPassenger(player);
-      return;
     }
   }
 

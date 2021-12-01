@@ -17,7 +17,7 @@ public class PacifistListener implements Listener {
 
   @EventHandler
   public void on(EntityDamageByEntityEvent event) {
-    if (event.getDamager().getType() == EntityType.PLAYER) {
+    if (event.getDamager().getType() != EntityType.PLAYER) {
       return;
     }
     Player damager = (Player) event.getDamager();

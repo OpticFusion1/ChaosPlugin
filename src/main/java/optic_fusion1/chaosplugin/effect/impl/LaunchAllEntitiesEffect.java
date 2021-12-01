@@ -2,7 +2,6 @@ package optic_fusion1.chaosplugin.effect.impl;
 
 import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.util.Utils;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class LaunchAllEntitiesEffect extends Effect {
@@ -13,9 +12,9 @@ public class LaunchAllEntitiesEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    for (LivingEntity entity : player.getWorld().getLivingEntities()) {
+    player.getWorld().getLivingEntities().forEach(entity -> {
       Utils.launchEntity(entity);
-    }
+    });
   }
 
 }

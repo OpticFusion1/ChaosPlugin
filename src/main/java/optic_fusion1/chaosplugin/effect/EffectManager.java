@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import optic_fusion1.chaosplugin.ChaosPlugin;
 import optic_fusion1.chaosplugin.util.Utils;
-import org.bukkit.entity.Player;
 
 public class EffectManager {
 

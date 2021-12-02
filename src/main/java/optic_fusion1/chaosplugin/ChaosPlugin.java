@@ -16,6 +16,7 @@ import optic_fusion1.chaosplugin.effect.impl.BeefEffect;
 import optic_fusion1.chaosplugin.effect.impl.ButterFingersEffect;
 import optic_fusion1.chaosplugin.effect.impl.ClearPotionEffectsEffect;
 import optic_fusion1.chaosplugin.effect.impl.ClearLagEffect;
+import optic_fusion1.chaosplugin.effect.impl.DemoScreenEffect;
 import optic_fusion1.chaosplugin.effect.impl.FakeCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.FullHealthEffect;
 import optic_fusion1.chaosplugin.effect.impl.FullHungerEffect;
@@ -186,6 +187,7 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(new InvisibleEntitiesEffect());
     registerEffect(invisibleEntitiesEffect);
     registerEffect(new LaunchAllEntitiesEffect());
+    registerEffect(new DemoScreenEffect());
   }
 
   private void registerEffect(Effect effect) {

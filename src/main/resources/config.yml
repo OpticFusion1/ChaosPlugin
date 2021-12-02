@@ -1,3 +1,7 @@
 prefix: "[Chaos] "
 effects:
+  # List of effects that should be disabled
+  #e.g.
+  #disabled:
+  # - "Watch Out"
   disabled: []

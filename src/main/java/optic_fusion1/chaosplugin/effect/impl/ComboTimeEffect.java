@@ -17,9 +17,9 @@ public class ComboTimeEffect extends Effect {
   @Override
   public void activate(Player player) {
     for (int i = 0; i <= 1; i++) {
-      for (Player target : Bukkit.getOnlinePlayers()) {
+      Bukkit.getOnlinePlayers().forEach(target -> {
         chaos.runRandomEffect(target);
-      }
+      });
     }
   }
 

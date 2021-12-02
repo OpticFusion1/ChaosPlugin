@@ -11,9 +11,9 @@ import org.bukkit.potion.PotionEffect;
 
 public class PotionEffectEffect extends TimedEffect implements Listener {
 
+  private static final HashMap<Player, PotionEffectEffectListener> LISTENERS = new HashMap<>();
   private PotionEffect potionEffect;
   private ChaosPlugin chaos;
-  private static final HashMap<Player, PotionEffectEffectListener> LISTENERS = new HashMap<>();
 
   public PotionEffectEffect(String name, PotionEffect potionEffect, ChaosPlugin chaos) {
     super(name);

@@ -60,6 +60,10 @@ public class SpawnRandomAnimalsEffect extends Effect {
         Fox fox = (Fox) entity;
         randomizeFox(fox);
       }
+      if (entityType == EntityType.SHEEP) {
+        Sheep sheep = (Sheep) entity;
+        randomizeSheep(sheep);
+      }
     }
   }
 

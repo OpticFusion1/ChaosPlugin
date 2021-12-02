@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
 import optic_fusion1.chaosplugin.ChaosPlugin;
 import optic_fusion1.chaosplugin.util.Utils;
 
@@ -13,12 +12,9 @@ public class EffectManager {
 
   private static final HashMap<String, Effect> ALL_EFFECTS = new HashMap<>();
   private static final HashMap<String, Effect> ENABLED_EFFECTS = new HashMap<>();
-  private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
-  private ChaosPlugin chaos;
   private List<String> disabledEffects;
 
   public EffectManager(ChaosPlugin chaos) {
-    this.chaos = chaos;
     disabledEffects = chaos.getConfig().getStringList("effect.disabled");
   }
 

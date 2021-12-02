@@ -18,9 +18,9 @@ public class InvulnerableEntitiesEffect extends TimedEffect {
   @Override
   public void activate(Player player) {
     for (Entity entity : player.getWorld().getEntities()) {
-      if (entity instanceof LivingEntity) {
-        entity.setInvulnerable(true);
-        invulnerableEntities.add((LivingEntity) entity);
+      if (entity instanceof LivingEntity livingEntity) {
+        livingEntity.setInvulnerable(true);
+        invulnerableEntities.add(livingEntity);
       }
     }
   }

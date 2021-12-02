@@ -122,7 +122,7 @@ public class ChaosPlugin extends JavaPlugin {
       BossBarCountdown countdown = new BossBarCountdown(effect.getName(), 90, this, true).setRunnable(() -> {
         timedEffect.deactivate(target);
       });
-      
+
       if (timedEffect.isGlobal()) {
         for (Player player : Bukkit.getOnlinePlayers()) {
           countdown.addPlayer(player);

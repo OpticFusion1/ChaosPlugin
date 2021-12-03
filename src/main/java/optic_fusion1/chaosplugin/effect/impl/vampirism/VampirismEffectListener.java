@@ -36,7 +36,7 @@ public class VampirismEffectListener implements Listener {
     if (!chaos.isVampirismEffectEnabledForPlayer(damager)) {
       return;
     }
-    if (damager.getHealth() == 20) {
+    if (damager.getHealth() >= 20) {
       return;
     }
     damager.setHealth(damager.getHealth() + 1);

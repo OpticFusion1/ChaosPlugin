@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>optic_fusion1</groupId>
   <artifactId>ChaosPlugin</artifactId>
-  <version>0.12.0</version>
+  <version>0.13.0</version>
   <packaging>jar</packaging>
 
   <build>
@@ -65,6 +65,12 @@
                   <exclude>com.google.guava:guava</exclude>
                   <exclude>com.google.code.gson:gson</exclude>
                   <exclude>net.md-5:bungeecord-chat</exclude>
+                  <exclude>com.google.guava:failureaccess</exclude>
+                  <exclude>com.google.guava:listenablefutur</exclude>
+                  <exclude>com.google.code.findbugs</exclude>
+                  <exclude>org.checkerframework:checker-qual</exclude>
+                  <exclude>com.google.errorprone:error_prone_annotations</exclude>
+                  <exclude>com.google.j2objc:j2objc-annotations</exclude>
                 </excludes>
               </artifactSet>
               <finalName>${project.artifactId}</finalName>

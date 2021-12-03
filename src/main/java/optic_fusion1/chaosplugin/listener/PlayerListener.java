@@ -22,6 +22,9 @@ public class PlayerListener implements Listener {
     if (player.isInvulnerable()) {
       player.setInvulnerable(false);
     }
+    if (player.isInvisible()) {
+      player.setInvisible(false);
+    }
     effectCountdownBossBar.removePlayer(player);
   }
 

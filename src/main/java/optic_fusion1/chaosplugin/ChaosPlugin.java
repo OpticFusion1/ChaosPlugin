@@ -39,7 +39,9 @@ import optic_fusion1.chaosplugin.effect.impl.SkyLavaEffect;
 import optic_fusion1.chaosplugin.effect.impl.HeavenEffect;
 import optic_fusion1.chaosplugin.effect.impl.SpawnRandomAnimalsEffect;
 import optic_fusion1.chaosplugin.effect.impl.GottaGoFastEffect;
+import optic_fusion1.chaosplugin.effect.impl.KickEffect;
 import optic_fusion1.chaosplugin.effect.impl.LaunchAllEntitiesEffect;
+import optic_fusion1.chaosplugin.effect.impl.OpenRandomInventoryEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonAngryBeeEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonChargedCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonCreeperEffect;
@@ -188,6 +190,8 @@ public class ChaosPlugin extends JavaPlugin {
     registerEffect(invisibleEntitiesEffect);
     registerEffect(new LaunchAllEntitiesEffect());
     registerEffect(new DemoScreenEffect());
+    registerEffect(new OpenRandomInventoryEffect());
+    registerEffect(new KickEffect());
   }
 
   private void registerEffect(Effect effect) {

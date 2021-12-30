@@ -1,5 +1,6 @@
 package optic_fusion1.chaosplugin.effect;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,10 +13,10 @@ public class EffectManager {
 
   private static final HashMap<String, Effect> ALL_EFFECTS = new HashMap<>();
   private static final HashMap<String, Effect> ENABLED_EFFECTS = new HashMap<>();
-  private List<String> disabledEffects;
+  private List<String> disabledEffects = new ArrayList<>();
 
   public EffectManager(ChaosPlugin chaos) {
-    disabledEffects = chaos.getConfig().getStringList("effect.disabled");
+    disabledEffects = chaos.getConfig().getStringList("settings.disabled-effects");
   }
 
   public void addEffect(Effect effect) {

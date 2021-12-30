@@ -1,7 +1,11 @@
-prefix: "[Chaos] "
-effects:
-  # List of effects that should be disabled
-  #e.g.
-  #disabled:
-  # - "Watch Out"
-  disabled: []
+# Internal Use Only. Do not modify.
+config-version: 1
+
+settings:
+ prefix: "[Chaos] "
+ # The amount of seconds it takes before a new effect becomes active
+ next-effect-countdown: 30
+ # The amount of seconds it takes before an effect ends
+ effect-countdown: 90
+ # List of effects that should be disabled
+ disabled-effects: []

@@ -14,9 +14,12 @@ public class OpenRandomInventoryEffect extends Effect {
   private static final List<Inventory> INVENTORIES = new ArrayList<>();
 
   public OpenRandomInventoryEffect() {
-    super("OpenRandomInventory");
+    super("Open Random Inventory");
     for (InventoryType inventoryType : InventoryType.values()) {
-      INVENTORIES.add(Bukkit.createInventory(null, inventoryType));
+      try {
+        INVENTORIES.add(Bukkit.createInventory(null, inventoryType));
+      } catch (Exception e) {
+      }
     }
   }
 

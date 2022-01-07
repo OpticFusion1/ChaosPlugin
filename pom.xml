@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>optic_fusion1</groupId>
     <artifactId>ChaosPlugin</artifactId>
-    <version>1</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <repositories>
@@ -64,22 +64,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>org.spigotmc:spigot-api</exclude>
-                                    <exclude>org.yaml:snakeyaml</exclude>
-                                    <exclude>commons-lang:commons-lang</exclude>
-                                    <exclude>com.google.guava:guava</exclude>
-                                    <exclude>com.google.code.gson:gson</exclude>
-                                    <exclude>net.md-5:bungeecord-chat</exclude>
-                                    <exclude>com.google.guava:failureaccess</exclude>
-                                    <exclude>com.google.guava:listenablefutur</exclude>
-                                    <exclude>com.google.code.findbugs</exclude>
-                                    <exclude>org.checkerframework:checker-qual</exclude>
-                                    <exclude>com.google.errorprone:error_prone_annotations</exclude>
-                                    <exclude>com.google.j2objc:j2objc-annotations</exclude>
-                                </excludes>
-                            </artifactSet>
                             <finalName>${project.artifactId}</finalName>
                         </configuration>
                     </execution>
@@ -93,6 +77,7 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.18.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

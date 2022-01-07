@@ -1,6 +1,7 @@
 package optic_fusion1.chaosplugin.effect;
 
 import optic_fusion1.chaosplugin.ChaosPlugin;
+import optic_fusion1.chaosplugin.effect.impl.AdventureEffect;
 import optic_fusion1.chaosplugin.effect.impl.AllPlayersExitVehicleEffect;
 import optic_fusion1.chaosplugin.effect.impl.BedrockFeetEffect;
 import optic_fusion1.chaosplugin.effect.impl.BeefEffect;
@@ -8,7 +9,9 @@ import optic_fusion1.chaosplugin.effect.impl.ButterFingersEffect;
 import optic_fusion1.chaosplugin.effect.impl.ClearLagEffect;
 import optic_fusion1.chaosplugin.effect.impl.ClearPotionEffectsEffect;
 import optic_fusion1.chaosplugin.effect.impl.ComboTimeEffect;
+import optic_fusion1.chaosplugin.effect.impl.DamageItemsEffect;
 import optic_fusion1.chaosplugin.effect.impl.DemoScreenEffect;
+import optic_fusion1.chaosplugin.effect.impl.DogLoverEffect;
 import optic_fusion1.chaosplugin.effect.impl.FakeCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.FullHealthEffect;
 import optic_fusion1.chaosplugin.effect.impl.FullHungerEffect;
@@ -28,12 +31,14 @@ import optic_fusion1.chaosplugin.effect.impl.KillerBunnyEffect;
 import optic_fusion1.chaosplugin.effect.impl.LaunchAllEntitiesEffect;
 import optic_fusion1.chaosplugin.effect.impl.LaunchPlayerEffect;
 import optic_fusion1.chaosplugin.effect.impl.LightningEffect;
+import optic_fusion1.chaosplugin.effect.impl.MysteryEffect;
 import optic_fusion1.chaosplugin.effect.impl.NiceExpEffect;
 import optic_fusion1.chaosplugin.effect.impl.NothingEffect;
 import optic_fusion1.chaosplugin.effect.impl.OpenRandomInventoryEffect;
 import optic_fusion1.chaosplugin.effect.impl.SetCurrentVehicleEffect;
 import optic_fusion1.chaosplugin.effect.impl.SkyLavaEffect;
 import optic_fusion1.chaosplugin.effect.impl.SpawnRandomAnimalsEffect;
+import optic_fusion1.chaosplugin.effect.impl.StarterPackEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonAngryBeeEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonChargedCreeperEffect;
 import optic_fusion1.chaosplugin.effect.impl.SummonCreeperEffect;
@@ -42,6 +47,7 @@ import optic_fusion1.chaosplugin.effect.impl.TripEffect;
 import optic_fusion1.chaosplugin.effect.impl.WatchOutEffect;
 import optic_fusion1.chaosplugin.effect.impl.WeaponGiverEffect;
 import optic_fusion1.chaosplugin.effect.impl.WhereDidEverybodyGoEffect;
+import optic_fusion1.chaosplugin.effect.impl.WingManEffect;
 import optic_fusion1.chaosplugin.effect.impl.ZeroExpEffect;
 import optic_fusion1.chaosplugin.effect.impl.ZeroHungerEffect;
 import optic_fusion1.chaosplugin.effect.impl.potioneffect.BlindnessEffect;
@@ -113,6 +119,12 @@ public class EffectRegistery {
     registerEffect(new DemoScreenEffect());
     registerEffect(new OpenRandomInventoryEffect());
     registerEffect(new KickEffect());
+    registerEffect(new AdventureEffect());
+    registerEffect(new DogLoverEffect());
+    registerEffect(new WingManEffect());
+    registerEffect(new StarterPackEffect());
+    registerEffect(new DamageItemsEffect());
+    registerEffect(new MysteryEffect(chaos));
   }
 
   private void registerEffect(Effect effect) {

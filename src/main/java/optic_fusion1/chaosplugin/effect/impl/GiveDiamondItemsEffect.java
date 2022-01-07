@@ -3,9 +3,9 @@ package optic_fusion1.chaosplugin.effect.impl;
 import java.util.EnumSet;
 import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.util.Utils;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class GiveDiamondItemsEffect extends Effect {
 
@@ -18,10 +18,8 @@ public class GiveDiamondItemsEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    Location location = player.getLocation();
-    for (Material material : DIAMOND_MATERIALS) {
-      Utils.dropItemNaturally(location, material);
-    }
+    ItemStack[] items = (ItemStack[]) DIAMOND_MATERIALS.toArray();
+    Utils.addItems(player, items);
   }
 
 }

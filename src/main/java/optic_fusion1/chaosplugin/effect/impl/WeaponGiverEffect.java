@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import optic_fusion1.chaosplugin.effect.Effect;
+import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -31,11 +32,7 @@ public class WeaponGiverEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    Location location = player.getLocation();
-    World world = location.getWorld();
-    ITEMS.forEach(itemStack -> {
-      world.dropItemNaturally(location, itemStack);
-    });
+    Utils.addItems(player, (ItemStack[]) ITEMS.toArray());
   }
 
 }

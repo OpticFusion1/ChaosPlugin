@@ -2,6 +2,7 @@ package optic_fusion1.chaosplugin.util;
 
 import static java.lang.Math.random;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
@@ -9,9 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -30,17 +31,16 @@ public final class Utils {
     return string;
   }
 
-  public static void dropItemNaturally(Location location, Material material) {
-    location.getWorld().dropItemNaturally(location, new ItemStack(material));
-  }
-
-  public static void dropItemNaturally(Location location, ItemStack... itemStacks) {
-    World world = location.getWorld();
-    for (ItemStack itemStack : itemStacks) {
-      world.dropItemNaturally(location, itemStack);
-    }
-  }
-
+//  public static void dropItemNaturally(Location location, Material material) {
+//    location.getWorld().dropItemNaturally(location, new ItemStack(material));
+//  }
+//
+//  public static void dropItemNaturally(Location location, ItemStack... itemStacks) {
+//    World world = location.getWorld();
+//    for (ItemStack itemStack : itemStacks) {
+//      world.dropItemNaturally(location, itemStack);
+//    }
+//  }
   public static <E> Optional<E> getRandomCollectionElement(Collection<E> e) {
     return e.stream().skip((int) (e.size() * Math.random())).findFirst();
   }
@@ -60,6 +60,15 @@ public final class Utils {
     entity.teleport(location);
     Vector direction = location.getDirection();
     entity.setVelocity(direction.multiply(50.0));
+  }
+
+  public static void addItems(Player player, ItemStack... items) {
+    Inventory inventory = player.getInventory();
+    HashMap<Integer, ItemStack> remainingItems = inventory.addItem(items);
+    for (ItemStack itemStack : remainingItems.values()) {
+      Location location = player.getLocation();
+      location.getWorld().dropItemNaturally(location, itemStack);
+    }
   }
 
 }

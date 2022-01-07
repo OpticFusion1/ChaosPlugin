@@ -31,8 +31,8 @@ public class ChaosPlugin extends JavaPlugin {
   public void onEnable() {
     loadConfig();
     effectManager = new EffectManager(this);
-    createEffectCountdown();
     new EffectRegistery(this).registerEffects();
+    createEffectCountdown();
     registerListeners();
   }
 
@@ -63,13 +63,17 @@ public class ChaosPlugin extends JavaPlugin {
   }
 
   public void runRandomEffect(Player target) {
+    runRandomEffect(target, false);
+  }
+
+  public void runRandomEffect(Player target, boolean mysteryEffect) {
     if (target == null) {
       return;
     }
     Effect effect = effectManager.getRandomEnabledEffect().get();
     effect.activate(target);
     if (effect instanceof TimedEffect timedEffect) {
-      BossBarCountdown countdown = new BossBarCountdown(effect.getName(),
+      BossBarCountdown countdown = new BossBarCountdown(mysteryEffect ? "Mystery Effect" : effect.getName(),
               getConfig().getInt("settings.effect-countdown"), this, true).setRunnable(() -> {
         timedEffect.deactivate(target);
       });
@@ -85,10 +89,11 @@ public class ChaosPlugin extends JavaPlugin {
       countdown.run();
       return;
     }
-
-    Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
-      target.sendMessage(Utils.colorize(prefix + effect.getName()));
-    }, 1);
+    if (!mysteryEffect) {
+      Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
+        target.sendMessage(Utils.colorize(prefix + effect.getName()));
+      }, 1);
+    }
   }
 
   public EffectManager getEffectManager() {

@@ -62,7 +62,7 @@ public final class Utils {
     entity.setVelocity(direction.multiply(50.0));
   }
 
-  public static void addItems(Player player, ItemStack... items) {
+  public static void addItems(Player player, ItemStack[] items) {
     Inventory inventory = player.getInventory();
     HashMap<Integer, ItemStack> remainingItems = inventory.addItem(items);
     for (ItemStack itemStack : remainingItems.values()) {
@@ -70,5 +70,6 @@ public final class Utils {
       location.getWorld().dropItemNaturally(location, itemStack);
     }
   }
+
 
 }

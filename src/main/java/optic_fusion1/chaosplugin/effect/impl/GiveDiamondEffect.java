@@ -14,7 +14,7 @@ public class GiveDiamondEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    Utils.addItems(player, new ItemStack(Material.DIAMOND));
+    Utils.addItems(player, new ItemStack[]{new ItemStack(Material.DIAMOND)});
   }
 
 }

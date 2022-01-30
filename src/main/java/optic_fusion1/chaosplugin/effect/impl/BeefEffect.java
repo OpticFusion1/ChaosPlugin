@@ -14,7 +14,7 @@ public class BeefEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    Utils.addItems(player, new ItemStack(Material.COOKED_BEEF, 16));
+    Utils.addItems(player, new ItemStack[]{new ItemStack(Material.COOKED_BEEF, 16)});
   }
 
 }

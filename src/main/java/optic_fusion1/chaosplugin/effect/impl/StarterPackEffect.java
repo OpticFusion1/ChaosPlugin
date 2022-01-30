@@ -20,7 +20,7 @@ public class StarterPackEffect extends Effect {
     ItemStack sword = new ItemStack(Material.IRON_SWORD);
     ItemStack bread = new ItemStack(Material.BREAD, 10);
     ItemStack torch = new ItemStack(Material.TORCH, 10);
-    Utils.addItems(player, pickaxe, axe, shovel, sword, bread, torch);
+    Utils.addItems(player, new ItemStack[]{pickaxe, axe, shovel, sword, bread, torch});
   }
 
 }

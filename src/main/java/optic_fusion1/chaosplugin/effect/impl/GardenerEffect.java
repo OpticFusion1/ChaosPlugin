@@ -1,9 +1,11 @@
 package optic_fusion1.chaosplugin.effect.impl;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import optic_fusion1.chaosplugin.effect.Effect;
+import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -12,7 +14,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class GardenerEffect extends Effect {
 
-  private static final List<ItemStack> ITEMS = new ArrayList<>();
+  private static final ItemStack[] ITEMS;
+  //private static final List<ItemStack> ITEMS = new ArrayList<>();
   private static final EnumSet<Material> MATERIALS = EnumSet.of(Material.OAK_SAPLING, Material.SPRUCE_SAPLING,
           Material.BIRCH_SAPLING, Material.JUNGLE_SAPLING, Material.ACACIA_SAPLING, Material.DARK_OAK_SAPLING,
           Material.GRASS, Material.FERN, Material.DEAD_BUSH, Material.SEAGRASS, Material.SEA_PICKLE,
@@ -25,9 +28,11 @@ public class GardenerEffect extends Effect {
           Material.ROSE_BUSH, Material.PEONY, Material.TALL_GRASS, Material.LARGE_FERN, Material.SWEET_BERRIES);
 
   static {
+    List<ItemStack> itemStacks = new ArrayList<>();
     MATERIALS.forEach(material -> {
-      ITEMS.add(createItem(material));
+      itemStacks.add(createItem(material));
     });
+    ITEMS = itemStacks.toArray(new ItemStack[0]);
   }
 
   public GardenerEffect() {
@@ -36,11 +41,7 @@ public class GardenerEffect extends Effect {
 
   @Override
   public void activate(Player player) {
-    Location location = player.getLocation();
-    World world = location.getWorld();
-    ITEMS.forEach(itemStack -> {
-      world.dropItemNaturally(location, itemStack);
-    });
+    Utils.addItems(player, ITEMS);
   }
 
   private static ItemStack createItem(Material material) {

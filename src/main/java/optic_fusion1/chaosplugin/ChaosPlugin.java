@@ -11,6 +11,8 @@ import optic_fusion1.chaosplugin.effect.TimedEffect;
 import optic_fusion1.chaosplugin.effect.impl.pacifist.PacifistListener;
 import optic_fusion1.chaosplugin.effect.impl.vampirism.VampirismEffectListener;
 import optic_fusion1.chaosplugin.listener.PlayerListener;
+import optic_fusion1.chaosplugin.user.User;
+import optic_fusion1.chaosplugin.user.UserManager;
 import optic_fusion1.chaosplugin.util.BossBarCountdown;
 import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.Bukkit;
@@ -21,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChaosPlugin extends JavaPlugin {
 
+  private static final UserManager USER_MANAGER = new UserManager();
   private EffectManager effectManager;
   private String prefix;
   private List<UUID> activeVampirism = new ArrayList<>();
@@ -71,13 +74,13 @@ public class ChaosPlugin extends JavaPlugin {
       return;
     }
     Effect effect = effectManager.getRandomEnabledEffect().get();
+    User user = USER_MANAGER.getUser(target.getUniqueId());
     effect.activate(target);
     if (effect instanceof TimedEffect timedEffect) {
       BossBarCountdown countdown = new BossBarCountdown(mysteryEffect ? "Mystery Effect" : effect.getName(),
               getConfig().getInt("settings.effect-countdown"), this, true).setRunnable(() -> {
         timedEffect.deactivate(target);
       });
-
       if (timedEffect.isGlobal()) {
         for (Player player : Bukkit.getOnlinePlayers()) {
           countdown.addPlayer(player);
@@ -85,6 +88,11 @@ public class ChaosPlugin extends JavaPlugin {
         countdown.run();
         return;
       }
+      if(user.isEffectActive(effect)) {
+        runRandomEffect(target, mysteryEffect);
+        return;
+      }
+      user.addActiveEffect(effect);
       countdown.addPlayer(target);
       countdown.run();
       return;
@@ -126,6 +134,10 @@ public class ChaosPlugin extends JavaPlugin {
 
   public BossBarCountdown getEffectCountdownBossBar() {
     return effectCountdown;
+  }
+
+  public UserManager getUserManager() {
+    return USER_MANAGER;
   }
 
 }

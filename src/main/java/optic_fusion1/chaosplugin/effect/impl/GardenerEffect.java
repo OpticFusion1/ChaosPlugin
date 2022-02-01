@@ -15,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 public class GardenerEffect extends Effect {
 
   private static final ItemStack[] ITEMS;
-  //private static final List<ItemStack> ITEMS = new ArrayList<>();
   private static final EnumSet<Material> MATERIALS = EnumSet.of(Material.OAK_SAPLING, Material.SPRUCE_SAPLING,
           Material.BIRCH_SAPLING, Material.JUNGLE_SAPLING, Material.ACACIA_SAPLING, Material.DARK_OAK_SAPLING,
           Material.GRASS, Material.FERN, Material.DEAD_BUSH, Material.SEAGRASS, Material.SEA_PICKLE,

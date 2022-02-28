@@ -5,18 +5,18 @@ import org.bukkit.entity.Player;
 
 public class InvulnerablePlayerEffect extends TimedEffect {
 
-  public InvulnerablePlayerEffect() {
-    super("Invulnerable Player");
-  }
+    public InvulnerablePlayerEffect() {
+        super("Invulnerable Player");
+    }
 
-  @Override
-  public void deactivate(Player player) {
-    player.setInvulnerable(false);
-  }
+    @Override
+    public void deactivate(Player player) {
+        player.setInvulnerable(false);
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.setInvulnerable(true);
-  }
+    @Override
+    public void activate(Player player) {
+        player.setInvulnerable(true);
+    }
 
 }

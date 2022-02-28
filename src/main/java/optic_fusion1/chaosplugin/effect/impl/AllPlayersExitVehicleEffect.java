@@ -6,17 +6,17 @@ import org.bukkit.entity.Player;
 
 public class AllPlayersExitVehicleEffect extends Effect {
 
-  public AllPlayersExitVehicleEffect() {
-    super("All Players Exit Vehicle", true);
-  }
-
-  @Override
-  public void activate(Player player) {
-    for (Player target : Bukkit.getOnlinePlayers()) {
-      if (target.isInsideVehicle()) {
-        target.eject();
-      }
+    public AllPlayersExitVehicleEffect() {
+        super("All Players Exit Vehicle", true);
     }
-  }
+
+    @Override
+    public void activate(Player player) {
+        for (Player target : Bukkit.getOnlinePlayers()) {
+            if (target.isInsideVehicle()) {
+                target.eject();
+            }
+        }
+    }
 
 }

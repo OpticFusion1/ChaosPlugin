@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 
 public class HalfHeartEffect extends Effect {
 
-  public HalfHeartEffect() {
-    super("Half a Heart");
-  }
+    public HalfHeartEffect() {
+        super("Half a Heart");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.setHealth(1.0);
-  }
+    @Override
+    public void activate(Player player) {
+        player.setHealth(1.0);
+    }
 
 }

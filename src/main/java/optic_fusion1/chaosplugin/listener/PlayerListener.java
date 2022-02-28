@@ -12,31 +12,31 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener {
 
-  private BossBarCountdown effectCountdownBossBar;
-  private UserManager userManager;
+    private BossBarCountdown effectCountdownBossBar;
+    private UserManager userManager;
 
-  public PlayerListener(ChaosPlugin chaos) {
-    effectCountdownBossBar = chaos.getEffectCountdownBossBar();
-    userManager = chaos.getUserManager();
-  }
-
-  @EventHandler
-  public void on(PlayerQuitEvent event) {
-    Player player = event.getPlayer();
-    if (player.isInvulnerable()) {
-      player.setInvulnerable(false);
+    public PlayerListener(ChaosPlugin chaos) {
+        effectCountdownBossBar = chaos.getEffectCountdownBossBar();
+        userManager = chaos.getUserManager();
     }
-    if (player.isInvisible()) {
-      player.setInvisible(false);
-    }
-    effectCountdownBossBar.removePlayer(player);
-    userManager.removeUSer(player.getUniqueId());
-  }
 
-  @EventHandler
-  public void on(PlayerJoinEvent event) {
-    userManager.addUser(new User(event.getPlayer().getUniqueId()));
-    effectCountdownBossBar.addPlayer(event.getPlayer());
-  }
+    @EventHandler
+    public void on(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (player.isInvulnerable()) {
+            player.setInvulnerable(false);
+        }
+        if (player.isInvisible()) {
+            player.setInvisible(false);
+        }
+        effectCountdownBossBar.removePlayer(player);
+        userManager.removeUSer(player.getUniqueId());
+    }
+
+    @EventHandler
+    public void on(PlayerJoinEvent event) {
+        userManager.addUser(new User(event.getPlayer().getUniqueId()));
+        effectCountdownBossBar.addPlayer(event.getPlayer());
+    }
 
 }

@@ -6,8 +6,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class HasteEffect extends PotionEffectEffect {
 
-  public HasteEffect(ChaosPlugin chaos) {
-    super("Haste", new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 255), chaos);
-  }
+    public HasteEffect(ChaosPlugin chaos) {
+        super("Haste", new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 255), chaos);
+    }
 
 }

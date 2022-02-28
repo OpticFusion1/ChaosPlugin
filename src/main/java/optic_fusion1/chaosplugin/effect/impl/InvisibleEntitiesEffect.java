@@ -13,42 +13,42 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class InvisibleEntitiesEffect extends TimedEffect implements Listener {
 
-  private List<LivingEntity> invisibleEntities = new ArrayList<>();
+    private List<LivingEntity> invisibleEntities = new ArrayList<>();
 
-  public InvisibleEntitiesEffect() {
-    super("Invisible Entities");
-  }
-
-  @Override
-  public void deactivate(Player player) {
-    for (LivingEntity entity : invisibleEntities) {
-      entity.setInvisible(false);
+    public InvisibleEntitiesEffect() {
+        super("Invisible Entities");
     }
-  }
 
-  @Override
-  public void activate(Player player) {
-    for (Entity entity : player.getWorld().getLivingEntities()) {
-      if (entity instanceof LivingEntity livingEntity) {
-        livingEntity.setInvisible(true);
-        invisibleEntities.add(livingEntity);
-      }
+    @Override
+    public void deactivate(Player player) {
+        for (LivingEntity entity : invisibleEntities) {
+            entity.setInvisible(false);
+        }
     }
-  }
 
-  @EventHandler
-  public void on(PlayerQuitEvent event) {
-    if (invisibleEntities.contains(event.getPlayer())) {
-      event.getPlayer().setInvisible(false);
-      invisibleEntities.remove(event.getPlayer());
+    @Override
+    public void activate(Player player) {
+        for (Entity entity : player.getWorld().getLivingEntities()) {
+            if (entity instanceof LivingEntity livingEntity) {
+                livingEntity.setInvisible(true);
+                invisibleEntities.add(livingEntity);
+            }
+        }
     }
-  }
 
-  @EventHandler
-  public void on(EntityDeathEvent event) {
-    if (invisibleEntities.contains(event.getEntity())) {
-      invisibleEntities.remove(event.getEntity());
+    @EventHandler
+    public void on(PlayerQuitEvent event) {
+        if (invisibleEntities.contains(event.getPlayer())) {
+            event.getPlayer().setInvisible(false);
+            invisibleEntities.remove(event.getPlayer());
+        }
     }
-  }
+
+    @EventHandler
+    public void on(EntityDeathEvent event) {
+        if (invisibleEntities.contains(event.getEntity())) {
+            invisibleEntities.remove(event.getEntity());
+        }
+    }
 
 }

@@ -6,15 +6,15 @@ import org.bukkit.potion.PotionEffectType;
 
 public class ClearPotionEffectsEffect extends Effect {
 
-  public ClearPotionEffectsEffect() {
-    super("Clear Potion Effects");
-  }
-
-  @Override
-  public void activate(Player player) {
-    for (PotionEffectType effect : PotionEffectType.values()) {
-      player.removePotionEffect(effect);
+    public ClearPotionEffectsEffect() {
+        super("Clear Potion Effects");
     }
-  }
+
+    @Override
+    public void activate(Player player) {
+        for (PotionEffectType effect : PotionEffectType.values()) {
+            player.removePotionEffect(effect);
+        }
+    }
 
 }

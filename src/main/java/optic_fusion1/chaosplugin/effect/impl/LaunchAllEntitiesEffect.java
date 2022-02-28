@@ -6,15 +6,15 @@ import org.bukkit.entity.Player;
 
 public class LaunchAllEntitiesEffect extends Effect {
 
-  public LaunchAllEntitiesEffect() {
-    super("Launch All Entities", true);
-  }
+    public LaunchAllEntitiesEffect() {
+        super("Launch All Entities", true);
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.getWorld().getLivingEntities().forEach(entity -> {
-      Utils.launchEntity(entity);
-    });
-  }
+    @Override
+    public void activate(Player player) {
+        player.getWorld().getLivingEntities().forEach(entity -> {
+            Utils.launchEntity(entity);
+        });
+    }
 
 }

@@ -7,22 +7,22 @@ import org.bukkit.entity.Player;
 
 public class AdventureEffect extends TimedEffect {
 
-  public AdventureEffect() {
-    super("Adventure", true);
-  }
-
-  @Override
-  public void deactivate(Player player) {
-    for (Player target : Bukkit.getOnlinePlayers()) {
-      target.setGameMode(GameMode.SURVIVAL);
+    public AdventureEffect() {
+        super("Adventure", true);
     }
-  }
 
-  @Override
-  public void activate(Player player) {
-    for (Player target : Bukkit.getOnlinePlayers()) {
-      target.setGameMode(GameMode.ADVENTURE);
+    @Override
+    public void deactivate(Player player) {
+        for (Player target : Bukkit.getOnlinePlayers()) {
+            target.setGameMode(GameMode.SURVIVAL);
+        }
     }
-  }
+
+    @Override
+    public void activate(Player player) {
+        for (Player target : Bukkit.getOnlinePlayers()) {
+            target.setGameMode(GameMode.ADVENTURE);
+        }
+    }
 
 }

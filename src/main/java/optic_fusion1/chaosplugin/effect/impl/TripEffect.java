@@ -7,19 +7,19 @@ import org.bukkit.inventory.ItemStack;
 
 public class TripEffect extends Effect {
 
-  public TripEffect() {
-    super("Trip");
-  }
-
-  @Override
-  public void activate(Player player) {
-    for (ItemStack itemStack : player.getInventory().getContents()) {
-      if (itemStack != null) {
-        Item droppedItem = player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
-        player.getInventory().remove(itemStack);
-        droppedItem.setPickupDelay(100);
-      }
+    public TripEffect() {
+        super("Trip");
     }
-  }
+
+    @Override
+    public void activate(Player player) {
+        for (ItemStack itemStack : player.getInventory().getContents()) {
+            if (itemStack != null) {
+                Item droppedItem = player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
+                player.getInventory().remove(itemStack);
+                droppedItem.setPickupDelay(100);
+            }
+        }
+    }
 
 }

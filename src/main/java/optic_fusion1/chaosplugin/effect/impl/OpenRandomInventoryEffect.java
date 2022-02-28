@@ -11,21 +11,21 @@ import org.bukkit.inventory.Inventory;
 
 public class OpenRandomInventoryEffect extends Effect {
 
-  private static final List<Inventory> INVENTORIES = new ArrayList<>();
+    private static final List<Inventory> INVENTORIES = new ArrayList<>();
 
-  public OpenRandomInventoryEffect() {
-    super("Open Random Inventory");
-    for (InventoryType inventoryType : InventoryType.values()) {
-      try {
-        INVENTORIES.add(Bukkit.createInventory(null, inventoryType));
-      } catch (Exception e) {
-      }
+    public OpenRandomInventoryEffect() {
+        super("Open Random Inventory");
+        for (InventoryType inventoryType : InventoryType.values()) {
+            try {
+                INVENTORIES.add(Bukkit.createInventory(null, inventoryType));
+            } catch (Exception e) {
+            }
+        }
     }
-  }
 
-  @Override
-  public void activate(Player player) {
-    player.openInventory(INVENTORIES.get(ThreadLocalRandom.current().nextInt(INVENTORIES.size())));
-  }
+    @Override
+    public void activate(Player player) {
+        player.openInventory(INVENTORIES.get(ThreadLocalRandom.current().nextInt(INVENTORIES.size())));
+    }
 
 }

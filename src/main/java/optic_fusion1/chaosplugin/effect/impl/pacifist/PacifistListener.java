@@ -9,23 +9,23 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class PacifistListener implements Listener {
 
-  private ChaosPlugin chaos;
+    private ChaosPlugin chaos;
 
-  public PacifistListener(ChaosPlugin chaos) {
-    this.chaos = chaos;
-  }
+    public PacifistListener(ChaosPlugin chaos) {
+        this.chaos = chaos;
+    }
 
-  @EventHandler
-  public void on(EntityDamageByEntityEvent event) {
-    if (event.getDamager().getType() != EntityType.PLAYER) {
-      return;
+    @EventHandler
+    public void on(EntityDamageByEntityEvent event) {
+        if (event.getDamager().getType() != EntityType.PLAYER) {
+            return;
+        }
+        Player damager = (Player) event.getDamager();
+        if (!chaos.isPacifistEffectEnabledForPlayer(damager)) {
+            return;
+        }
+        damager.setFireTicks(1000);
+        damager.setHealth(0);
     }
-    Player damager = (Player) event.getDamager();
-    if (!chaos.isPacifistEffectEnabledForPlayer(damager)) {
-      return;
-    }
-    damager.setFireTicks(1000);
-    damager.setHealth(0);
-  }
 
 }

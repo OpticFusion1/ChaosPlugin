@@ -6,8 +6,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class BlindnessEffect extends PotionEffectEffect {
 
-  public BlindnessEffect(ChaosPlugin chaos) {
-    super("Blindness", new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1), chaos);
-  }
+    public BlindnessEffect(ChaosPlugin chaos) {
+        super("Blindness", new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1), chaos);
+    }
 
 }

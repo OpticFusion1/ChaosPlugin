@@ -5,14 +5,14 @@ import org.bukkit.entity.Player;
 
 public class ZeroExpEffect extends Effect {
 
-  public ZeroExpEffect() {
-    super("Zero Exp");
-  }
+    public ZeroExpEffect() {
+        super("Zero Exp");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.setExp(0);
-    player.setLevel(0);
-  }
+    @Override
+    public void activate(Player player) {
+        player.setExp(0);
+        player.setLevel(0);
+    }
 
 }

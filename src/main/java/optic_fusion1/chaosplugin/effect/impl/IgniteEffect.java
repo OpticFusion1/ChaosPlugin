@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 
 public class IgniteEffect extends Effect {
 
-  public IgniteEffect() {
-    super("Ignite");
-  }
+    public IgniteEffect() {
+        super("Ignite");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.getLocation().getBlock().setType(Material.FIRE);
-  }
+    @Override
+    public void activate(Player player) {
+        player.getLocation().getBlock().setType(Material.FIRE);
+    }
 
 }

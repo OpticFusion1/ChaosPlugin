@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 
 public class ZeroHungerEffect extends Effect {
 
-  public ZeroHungerEffect() {
-    super("Zero Hunger");
-  }
+    public ZeroHungerEffect() {
+        super("Zero Hunger");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.setFoodLevel(0);
-  }
+    @Override
+    public void activate(Player player) {
+        player.setFoodLevel(0);
+    }
 
 }

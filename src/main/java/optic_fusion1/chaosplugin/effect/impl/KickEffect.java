@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 
 public class KickEffect extends Effect {
 
-  public KickEffect() {
-    super("Kick");
-  }
+    public KickEffect() {
+        super("Kick");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.kickPlayer("You have been kicked");
-  }
+    @Override
+    public void activate(Player player) {
+        player.kickPlayer("You have been kicked");
+    }
 
 }

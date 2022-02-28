@@ -7,25 +7,25 @@ import org.bukkit.entity.Player;
 
 public class WhereDidEverybodyGoEffect extends TimedEffect {
 
-  private ChaosPlugin chaos;
+    private ChaosPlugin chaos;
 
-  public WhereDidEverybodyGoEffect(ChaosPlugin chaos) {
-    super("Where Did Everybody Go?");
-    this.chaos = chaos;
-  }
-
-  @Override
-  public void deactivate(Player player) {
-    for (Player target : Bukkit.getOnlinePlayers()) {
-      player.showPlayer(chaos, target);
+    public WhereDidEverybodyGoEffect(ChaosPlugin chaos) {
+        super("Where Did Everybody Go?");
+        this.chaos = chaos;
     }
-  }
 
-  @Override
-  public void activate(Player player) {
-    for (Player target : Bukkit.getOnlinePlayers()) {
-      player.hidePlayer(chaos, target);
+    @Override
+    public void deactivate(Player player) {
+        for (Player target : Bukkit.getOnlinePlayers()) {
+            player.showPlayer(chaos, target);
+        }
     }
-  }
+
+    @Override
+    public void activate(Player player) {
+        for (Player target : Bukkit.getOnlinePlayers()) {
+            player.hidePlayer(chaos, target);
+        }
+    }
 
 }

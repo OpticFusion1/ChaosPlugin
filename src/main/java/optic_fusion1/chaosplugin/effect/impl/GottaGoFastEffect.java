@@ -7,8 +7,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class GottaGoFastEffect extends PotionEffectEffect {
 
-  public GottaGoFastEffect(ChaosPlugin chaos) {
-    super("Gotta Go Fast", new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 255), chaos);
-  }
+    public GottaGoFastEffect(ChaosPlugin chaos) {
+        super("Gotta Go Fast", new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 255), chaos);
+    }
 
 }

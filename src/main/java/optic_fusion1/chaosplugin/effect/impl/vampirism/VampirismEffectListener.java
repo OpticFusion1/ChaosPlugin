@@ -10,36 +10,36 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 
 public class VampirismEffectListener implements Listener {
 
-  private ChaosPlugin chaos;
+    private ChaosPlugin chaos;
 
-  public VampirismEffectListener(ChaosPlugin chaos) {
-    this.chaos = chaos;
-  }
+    public VampirismEffectListener(ChaosPlugin chaos) {
+        this.chaos = chaos;
+    }
 
-  @EventHandler
-  public void on(EntityRegainHealthEvent event) {
-    if (event.getEntityType() != EntityType.PLAYER) {
-      return;
+    @EventHandler
+    public void on(EntityRegainHealthEvent event) {
+        if (event.getEntityType() != EntityType.PLAYER) {
+            return;
+        }
+        Player player = (Player) event.getEntity();
+        if (chaos.isVampirismEffectEnabledForPlayer(player)) {
+            event.setCancelled(true);
+        }
     }
-    Player player = (Player) event.getEntity();
-    if (chaos.isVampirismEffectEnabledForPlayer(player)) {
-      event.setCancelled(true);
-    }
-  }
 
-  @EventHandler
-  public void on(EntityDamageByEntityEvent event) {
-    if (event.getDamager().getType() != EntityType.PLAYER) {
-      return;
+    @EventHandler
+    public void on(EntityDamageByEntityEvent event) {
+        if (event.getDamager().getType() != EntityType.PLAYER) {
+            return;
+        }
+        Player damager = (Player) event.getDamager();
+        if (!chaos.isVampirismEffectEnabledForPlayer(damager)) {
+            return;
+        }
+        if (damager.getHealth() >= 20) {
+            return;
+        }
+        damager.setHealth(damager.getHealth() + 1);
     }
-    Player damager = (Player) event.getDamager();
-    if (!chaos.isVampirismEffectEnabledForPlayer(damager)) {
-      return;
-    }
-    if (damager.getHealth() >= 20) {
-      return;
-    }
-    damager.setHealth(damager.getHealth() + 1);
-  }
 
 }

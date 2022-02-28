@@ -8,13 +8,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class BeefEffect extends Effect {
 
-  public BeefEffect() {
-    super("Beef");
-  }
+    public BeefEffect() {
+        super("Beef");
+    }
 
-  @Override
-  public void activate(Player player) {
-    Utils.addItems(player, new ItemStack[]{new ItemStack(Material.COOKED_BEEF, 16)});
-  }
+    @Override
+    public void activate(Player player) {
+        Utils.addItems(player, new ItemStack[]{new ItemStack(Material.COOKED_BEEF, 16)});
+    }
 
 }

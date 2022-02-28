@@ -13,25 +13,25 @@ import org.bukkit.inventory.ItemStack;
 
 public class GiveDiamondItemsEffect extends Effect {
 
-  private static final ItemStack[] ITEMS;
-  private static final EnumSet<Material> DIAMOND_MATERIALS = EnumSet.of(Material.DIAMOND_SWORD,
-          Material.DIAMOND_PICKAXE, Material.DIAMOND_AXE, Material.DIAMOND_SHOVEL, Material.DIAMOND_HOE);
+    private static final ItemStack[] ITEMS;
+    private static final EnumSet<Material> DIAMOND_MATERIALS = EnumSet.of(Material.DIAMOND_SWORD,
+            Material.DIAMOND_PICKAXE, Material.DIAMOND_AXE, Material.DIAMOND_SHOVEL, Material.DIAMOND_HOE);
 
-  static {
-    List<ItemStack> itemStacks = new ArrayList<>();
-    for (Material material : DIAMOND_MATERIALS) {
-      itemStacks.add(new ItemStack(material));
+    static {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for (Material material : DIAMOND_MATERIALS) {
+            itemStacks.add(new ItemStack(material));
+        }
+        ITEMS = itemStacks.toArray(new ItemStack[0]);
     }
-    ITEMS = itemStacks.toArray(new ItemStack[0]);
-  }
 
-  public GiveDiamondItemsEffect() {
-    super("Give Diamond Items");
-  }
+    public GiveDiamondItemsEffect() {
+        super("Give Diamond Items");
+    }
 
-  @Override
-  public void activate(Player player) {
-    Utils.addItems(player, ITEMS);
-  }
+    @Override
+    public void activate(Player player) {
+        Utils.addItems(player, ITEMS);
+    }
 
 }

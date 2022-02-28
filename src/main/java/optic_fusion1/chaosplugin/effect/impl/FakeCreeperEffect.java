@@ -7,13 +7,13 @@ import org.bukkit.entity.Player;
 
 public class FakeCreeperEffect extends Effect {
 
-  public FakeCreeperEffect() {
-    super("Fake Creeper");
-  }
+    public FakeCreeperEffect() {
+        super("Fake Creeper");
+    }
 
-  @Override
-  public void activate(Player player) {
-    SoundUtils.playForPlayer(player, Sound.ENTITY_CREEPER_PRIMED);
-  }
+    @Override
+    public void activate(Player player) {
+        SoundUtils.playForPlayer(player, Sound.ENTITY_CREEPER_PRIMED);
+    }
 
 }

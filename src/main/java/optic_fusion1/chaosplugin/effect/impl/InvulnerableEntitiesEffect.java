@@ -9,29 +9,33 @@ import org.bukkit.entity.Player;
 
 public class InvulnerableEntitiesEffect extends TimedEffect {
 
-  private List<LivingEntity> invulnerableEntities = new ArrayList<>();
+    private static final List<LivingEntity> INVULNERABLE_ENTITIES = new ArrayList<>();
 
-  public InvulnerableEntitiesEffect() {
-    super("Invulnerable Entities", true);
-  }
-  
-  @Override
-  public void activate(Player player) {
-    for (Entity entity : player.getWorld().getEntities()) {
-      if (entity instanceof LivingEntity livingEntity) {
-        livingEntity.setInvulnerable(true);
-        invulnerableEntities.add(livingEntity);
-      }
+    public InvulnerableEntitiesEffect() {
+        super("Invulnerable Entities", true);
     }
-  }
 
-  @Override
-  public void deactivate(Player player) {
-    for (Entity entity : invulnerableEntities) {
-      if (entity.isInvulnerable()) {
-        entity.setInvulnerable(false);
-      }
+    @Override
+    public void activate(Player player) {
+        for (Entity entity : player.getWorld().getEntities()) {
+            if (entity instanceof LivingEntity livingEntity) {
+                livingEntity.setInvulnerable(true);
+                INVULNERABLE_ENTITIES.add(livingEntity);
+            }
+        }
     }
-  }
+
+    @Override
+    public void deactivate(Player player) {
+        disable();
+    }
+
+    public static void disable() {
+        for (Entity entity : INVULNERABLE_ENTITIES) {
+            if (entity.isInvulnerable()) {
+                entity.setInvulnerable(false);
+            }
+        }
+    }
 
 }

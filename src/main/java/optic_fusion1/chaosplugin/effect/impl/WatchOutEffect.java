@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 
 public class WatchOutEffect extends Effect {
 
-  public WatchOutEffect() {
-    super("Watch Out");
-  }
+    public WatchOutEffect() {
+        super("Watch Out");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.getLocation().add(0.0, 12.0, 0.0).getBlock().setType(Material.ANVIL);
-  }
+    @Override
+    public void activate(Player player) {
+        player.getLocation().add(0.0, 12.0, 0.0).getBlock().setType(Material.ANVIL);
+    }
 
 }

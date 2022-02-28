@@ -18,18 +18,18 @@ import org.bukkit.util.Vector;
 
 public final class Utils {
 
-  private Utils() {
-  }
-
-  public static String colorize(String string) {
-    Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-    for (Matcher matcher = pattern.matcher(string); matcher.find(); matcher = pattern.matcher(string)) {
-      String color = string.substring(matcher.start(), matcher.end());
-      string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
+    private Utils() {
     }
-    string = ChatColor.translateAlternateColorCodes('&', string);
-    return string;
-  }
+
+    public static String colorize(String string) {
+        Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+        for (Matcher matcher = pattern.matcher(string); matcher.find(); matcher = pattern.matcher(string)) {
+            String color = string.substring(matcher.start(), matcher.end());
+            string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
+        }
+        string = ChatColor.translateAlternateColorCodes('&', string);
+        return string;
+    }
 
 //  public static void dropItemNaturally(Location location, Material material) {
 //    location.getWorld().dropItemNaturally(location, new ItemStack(material));
@@ -41,35 +41,34 @@ public final class Utils {
 //      world.dropItemNaturally(location, itemStack);
 //    }
 //  }
-  public static <E> Optional<E> getRandomCollectionElement(Collection<E> e) {
-    return e.stream().skip((int) (e.size() * Math.random())).findFirst();
-  }
-
-  public static <E> E getRandomSetElement(Set<E> set) {
-    return set.stream().skip(new Random().nextInt(set.size())).findFirst().orElse(null);
-  }
-
-  public static Location getLocationInCircle(Location origin, Integer radius) {
-    double angle = random() * 360;
-    return origin.add(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
-  }
-
-  public static void launchEntity(Entity entity) {
-    Location location = entity.getLocation();
-    location.setPitch(-90);
-    entity.teleport(location);
-    Vector direction = location.getDirection();
-    entity.setVelocity(direction.multiply(50.0));
-  }
-
-  public static void addItems(Player player, ItemStack[] items) {
-    Inventory inventory = player.getInventory();
-    HashMap<Integer, ItemStack> remainingItems = inventory.addItem(items);
-    for (ItemStack itemStack : remainingItems.values()) {
-      Location location = player.getLocation();
-      location.getWorld().dropItemNaturally(location, itemStack);
+    public static <E> Optional<E> getRandomCollectionElement(Collection<E> e) {
+        return e.stream().skip((int) (e.size() * Math.random())).findFirst();
     }
-  }
 
+    public static <E> E getRandomSetElement(Set<E> set) {
+        return set.stream().skip(new Random().nextInt(set.size())).findFirst().orElse(null);
+    }
+
+    public static Location getLocationInCircle(Location origin, Integer radius) {
+        double angle = random() * 360;
+        return origin.add(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
+    }
+
+    public static void launchEntity(Entity entity) {
+        Location location = entity.getLocation();
+        location.setPitch(-90);
+        entity.teleport(location);
+        Vector direction = location.getDirection();
+        entity.setVelocity(direction.multiply(50.0));
+    }
+
+    public static void addItems(Player player, ItemStack[] items) {
+        Inventory inventory = player.getInventory();
+        HashMap<Integer, ItemStack> remainingItems = inventory.addItem(items);
+        for (ItemStack itemStack : remainingItems.values()) {
+            Location location = player.getLocation();
+            location.getWorld().dropItemNaturally(location, itemStack);
+        }
+    }
 
 }

@@ -6,21 +6,21 @@ import org.bukkit.entity.Player;
 
 public class PacifistEffect extends TimedEffect {
 
-  private ChaosPlugin chaos;
+    private ChaosPlugin chaos;
 
-  public PacifistEffect(ChaosPlugin chaos) {
-    super("Pacifist");
-    this.chaos = chaos;
-  }
+    public PacifistEffect(ChaosPlugin chaos) {
+        super("Pacifist");
+        this.chaos = chaos;
+    }
 
-  @Override
-  public void deactivate(Player player) {
-    chaos.removeFromActivePacifist(player);
-  }
+    @Override
+    public void deactivate(Player player) {
+        chaos.removeFromActivePacifist(player);
+    }
 
-  @Override
-  public void activate(Player player) {
-    chaos.addToActivePacifist(player);
-  }
+    @Override
+    public void activate(Player player) {
+        chaos.addToActivePacifist(player);
+    }
 
 }

@@ -8,6 +8,7 @@ import optic_fusion1.chaosplugin.effect.Effect;
 import optic_fusion1.chaosplugin.effect.EffectManager;
 import optic_fusion1.chaosplugin.effect.EffectRegistery;
 import optic_fusion1.chaosplugin.effect.TimedEffect;
+import optic_fusion1.chaosplugin.effect.impl.InvulnerableEntitiesEffect;
 import optic_fusion1.chaosplugin.effect.impl.pacifist.PacifistListener;
 import optic_fusion1.chaosplugin.effect.impl.vampirism.VampirismEffectListener;
 import optic_fusion1.chaosplugin.listener.PlayerListener;
@@ -23,121 +24,127 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChaosPlugin extends JavaPlugin {
 
-  private static final UserManager USER_MANAGER = new UserManager();
-  private EffectManager effectManager;
-  private String prefix;
-  private List<UUID> activeVampirism = new ArrayList<>();
-  private List<UUID> activePacifist = new ArrayList<>();
-  private BossBarCountdown effectCountdown;
+    private static final UserManager USER_MANAGER = new UserManager();
+    private EffectManager effectManager;
+    private String prefix;
+    private List<UUID> activeVampirism = new ArrayList<>();
+    private List<UUID> activePacifist = new ArrayList<>();
+    private BossBarCountdown effectCountdown;
 
-  @Override
-  public void onEnable() {
-    loadConfig();
-    effectManager = new EffectManager(this);
-    new EffectRegistery(this).registerEffects();
-    createEffectCountdown();
-    registerListeners();
-  }
-
-  private void createEffectCountdown() {
-    effectCountdown = new BossBarCountdown("Effect Countdown", getConfig().getInt("settings.next-effect-countdown"),
-            this).setRunnable(() -> {
-      Bukkit.getOnlinePlayers().forEach(target -> {
-        runRandomEffect(target);
-      });
-    });
-    effectCountdown.run();
-  }
-
-  private void registerListeners() {
-    PluginManager pluginManager = Bukkit.getPluginManager();
-    pluginManager.registerEvents(new PlayerListener(this), this);
-    pluginManager.registerEvents(new VampirismEffectListener(this), this);
-    pluginManager.registerEvents(new PacifistListener(this), this);
-  }
-
-  private void loadConfig() {
-    File configFile = new File(getDataFolder(), "config.yml");
-    if (!configFile.exists()) {
-      saveDefaultConfig();
+    @Override
+    public void onEnable() {
+        loadConfig();
+        effectManager = new EffectManager(this);
+        new EffectRegistery(this).registerEffects();
+        createEffectCountdown();
+        registerListeners();
     }
-    FileConfiguration config = getConfig();
-    prefix = Utils.colorize(config.getString("settings.prefix"));
-  }
 
-  public void runRandomEffect(Player target) {
-    runRandomEffect(target, false);
-  }
-
-  public void runRandomEffect(Player target, boolean mysteryEffect) {
-    if (target == null) {
-      return;
+    @Override
+    public void onDisable() {
+        // TODO: Implement proper Effect Life-Cycle
+        InvulnerableEntitiesEffect.disable();
     }
-    Effect effect = effectManager.getRandomEnabledEffect().get();
-    User user = USER_MANAGER.getUser(target.getUniqueId());
-    effect.activate(target);
-    if (effect instanceof TimedEffect timedEffect) {
-      BossBarCountdown countdown = new BossBarCountdown(mysteryEffect ? "Mystery Effect" : effect.getName(),
-              getConfig().getInt("settings.effect-countdown"), this, true).setRunnable(() -> {
-        timedEffect.deactivate(target);
-      });
-      if (timedEffect.isGlobal()) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-          countdown.addPlayer(player);
+
+    private void createEffectCountdown() {
+        effectCountdown = new BossBarCountdown("Effect Countdown", getConfig().getInt("settings.next-effect-countdown"),
+                this).setRunnable(() -> {
+            Bukkit.getOnlinePlayers().forEach(target -> {
+                runRandomEffect(target);
+            });
+        });
+        effectCountdown.run();
+    }
+
+    private void registerListeners() {
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new PlayerListener(this), this);
+        pluginManager.registerEvents(new VampirismEffectListener(this), this);
+        pluginManager.registerEvents(new PacifistListener(this), this);
+    }
+
+    private void loadConfig() {
+        File configFile = new File(getDataFolder(), "config.yml");
+        if (!configFile.exists()) {
+            saveDefaultConfig();
         }
-        countdown.run();
-        return;
-      }
-      if(user.isEffectActive(effect)) {
-        runRandomEffect(target, mysteryEffect);
-        return;
-      }
-      user.addActiveEffect(effect);
-      countdown.addPlayer(target);
-      countdown.run();
-      return;
+        FileConfiguration config = getConfig();
+        prefix = Utils.colorize(config.getString("settings.prefix"));
     }
-    if (!mysteryEffect) {
-      Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
-        target.sendMessage(Utils.colorize(prefix + effect.getName()));
-      }, 1);
+
+    public void runRandomEffect(Player target) {
+        runRandomEffect(target, false);
     }
-  }
 
-  public EffectManager getEffectManager() {
-    return effectManager;
-  }
+    public void runRandomEffect(Player target, boolean mysteryEffect) {
+        if (target == null) {
+            return;
+        }
+        Effect effect = effectManager.getRandomEnabledEffect().get();
+        User user = USER_MANAGER.getUser(target.getUniqueId());
+        effect.activate(target);
+        if (effect instanceof TimedEffect timedEffect) {
+            BossBarCountdown countdown = new BossBarCountdown(mysteryEffect ? "Mystery Effect" : effect.getName(),
+                    getConfig().getInt("settings.effect-countdown"), this, true).setRunnable(() -> {
+                timedEffect.deactivate(target);
+            });
+            if (timedEffect.isGlobal()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    countdown.addPlayer(player);
+                }
+                countdown.run();
+                return;
+            }
+            if (user.isEffectActive(effect)) {
+                runRandomEffect(target, mysteryEffect);
+                return;
+            }
+            user.addActiveEffect(effect);
+            countdown.addPlayer(target);
+            countdown.run();
+            return;
+        }
+        if (!mysteryEffect) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
+                target.sendMessage(Utils.colorize(prefix + effect.getName()));
+            }, 1);
+        }
+    }
 
-  public void addToActiveVampirism(Player player) {
-    activeVampirism.add(player.getUniqueId());
-  }
+    public EffectManager getEffectManager() {
+        return effectManager;
+    }
 
-  public void removeFromActiveVampirism(Player player) {
-    activeVampirism.remove(player.getUniqueId());
-  }
+    public void addToActiveVampirism(Player player) {
+        activeVampirism.add(player.getUniqueId());
+    }
 
-  public boolean isVampirismEffectEnabledForPlayer(Player player) {
-    return activeVampirism.contains(player.getUniqueId());
-  }
+    public void removeFromActiveVampirism(Player player) {
+        activeVampirism.remove(player.getUniqueId());
+    }
 
-  public void addToActivePacifist(Player player) {
-    activePacifist.add(player.getUniqueId());
-  }
+    public boolean isVampirismEffectEnabledForPlayer(Player player) {
+        return activeVampirism.contains(player.getUniqueId());
+    }
 
-  public void removeFromActivePacifist(Player player) {
-    activePacifist.remove(player.getUniqueId());
-  }
+    public void addToActivePacifist(Player player) {
+        activePacifist.add(player.getUniqueId());
+    }
 
-  public boolean isPacifistEffectEnabledForPlayer(Player player) {
-    return activePacifist.contains(player.getUniqueId());
-  }
+    public void removeFromActivePacifist(Player player) {
+        activePacifist.remove(player.getUniqueId());
+    }
 
-  public BossBarCountdown getEffectCountdownBossBar() {
-    return effectCountdown;
-  }
+    public boolean isPacifistEffectEnabledForPlayer(Player player) {
+        return activePacifist.contains(player.getUniqueId());
+    }
 
-  public UserManager getUserManager() {
-    return USER_MANAGER;
-  }
+    public BossBarCountdown getEffectCountdownBossBar() {
+        return effectCountdown;
+    }
+
+    public UserManager getUserManager() {
+        return USER_MANAGER;
+    }
 
 }

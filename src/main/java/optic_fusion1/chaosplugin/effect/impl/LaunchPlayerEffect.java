@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 
 public class LaunchPlayerEffect extends Effect {
 
-  public LaunchPlayerEffect() {
-    super("Launch Player");
-  }
+    public LaunchPlayerEffect() {
+        super("Launch Player");
+    }
 
-  @Override
-  public void activate(Player player) {
-    Utils.launchEntity(player);
-  }
+    @Override
+    public void activate(Player player) {
+        Utils.launchEntity(player);
+    }
 
 }

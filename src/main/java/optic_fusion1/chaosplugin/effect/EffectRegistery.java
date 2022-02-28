@@ -59,76 +59,76 @@ import org.bukkit.Bukkit;
 
 public class EffectRegistery {
 
-  private EffectManager effectManager;
-  private ChaosPlugin chaos;
+    private EffectManager effectManager;
+    private ChaosPlugin chaos;
 
-  public EffectRegistery(ChaosPlugin chaos) {
-    this.chaos = chaos;
-    effectManager = chaos.getEffectManager();
-  }
+    public EffectRegistery(ChaosPlugin chaos) {
+        this.chaos = chaos;
+        effectManager = chaos.getEffectManager();
+    }
 
-  public void registerEffects() {
-    registerEffect(new GiveDiamondEffect());
-    registerEffect(new GiveDiamondItemsEffect());
-    registerEffect(new SummonAngryBeeEffect());
-    registerEffect(new SummonCreeperEffect());
-    registerEffect(new SummonChargedCreeperEffect());
-    registerEffect(new ZeroExpEffect());
-    registerEffect(new FakeCreeperEffect());
-    registerEffect(new TripEffect());
-    registerEffect(new ZeroHungerEffect());
-    registerEffect(new SummonRandomTreeEffect());
-    registerEffect(new GottaGoFastEffect(chaos));
-    registerEffect(new SkyLavaEffect());
-    registerEffect(new HeavenEffect());
-    registerEffect(new NiceExpEffect());
-    registerEffect(new MiningFatigueEffect(chaos));
-    registerEffect(new LightningEffect(chaos));
-    registerEffect(new IgniteEffect());
-    registerEffect(new HasteEffect(chaos));
-    registerEffect(new HalfHeartEffect());
-    registerEffect(new GardenerEffect());
-    registerEffect(new FullHungerEffect());
-    registerEffect(new FullHealthEffect());
-    registerEffect(new ButterFingersEffect());
-    registerEffect(new ClearLagEffect());
-    registerEffect(new BlindnessEffect(chaos));
-    registerEffect(new BeefEffect());
-    registerEffect(new BedrockFeetEffect());
-    registerEffect(new WatchOutEffect());
-    registerEffect(new ComboTimeEffect(chaos));
-    registerEffect(new NightVisionEffect(chaos));
-    registerEffect(new NothingEffect());
-    registerEffect(new WhereDidEverybodyGoEffect(chaos));
-    registerEffect(new ClearPotionEffectsEffect());
-    registerEffect(new LaunchPlayerEffect());
-    registerEffect(new WeaponGiverEffect());
-    registerEffect(new InvulnerablePlayerEffect());
-    registerEffect(new SpawnRandomAnimalsEffect());
-    registerEffect(new SetCurrentVehicleEffect());
-    registerEffect(new KillerBunnyEffect());
-    registerEffect(new HeresJohnnyEffect());
-    registerEffect(new VampirismEffect(chaos));
-    registerEffect(new AllPlayersExitVehicleEffect());
-    registerEffect(new InvulnerableEntitiesEffect());
-    registerEffect(new InvisibleEntitiesEffect());
-    InvisibleEntitiesEffect invisibleEntitiesEffect = new InvisibleEntitiesEffect();
-    Bukkit.getPluginManager().registerEvents(invisibleEntitiesEffect, chaos);
-    registerEffect(invisibleEntitiesEffect);
-    registerEffect(new LaunchAllEntitiesEffect());
-    registerEffect(new DemoScreenEffect());
-    registerEffect(new OpenRandomInventoryEffect());
-    registerEffect(new KickEffect());
-    registerEffect(new AdventureEffect());
-    registerEffect(new DogLoverEffect());
-    registerEffect(new WingManEffect());
-    registerEffect(new StarterPackEffect());
-    registerEffect(new DamageItemsEffect());
-    registerEffect(new MysteryEffect(chaos));
-  }
+    public void registerEffects() {
+        registerEffect(new GiveDiamondEffect());
+        registerEffect(new GiveDiamondItemsEffect());
+        registerEffect(new SummonAngryBeeEffect());
+        registerEffect(new SummonCreeperEffect());
+        registerEffect(new SummonChargedCreeperEffect());
+        registerEffect(new ZeroExpEffect());
+        registerEffect(new FakeCreeperEffect());
+        registerEffect(new TripEffect());
+        registerEffect(new ZeroHungerEffect());
+        registerEffect(new SummonRandomTreeEffect());
+        registerEffect(new GottaGoFastEffect(chaos));
+        registerEffect(new SkyLavaEffect());
+        registerEffect(new HeavenEffect());
+        registerEffect(new NiceExpEffect());
+        registerEffect(new MiningFatigueEffect(chaos));
+        registerEffect(new LightningEffect(chaos));
+        registerEffect(new IgniteEffect());
+        registerEffect(new HasteEffect(chaos));
+        registerEffect(new HalfHeartEffect());
+        registerEffect(new GardenerEffect());
+        registerEffect(new FullHungerEffect());
+        registerEffect(new FullHealthEffect());
+        registerEffect(new ButterFingersEffect());
+        registerEffect(new ClearLagEffect());
+        registerEffect(new BlindnessEffect(chaos));
+        registerEffect(new BeefEffect());
+        registerEffect(new BedrockFeetEffect());
+        registerEffect(new WatchOutEffect());
+        registerEffect(new ComboTimeEffect(chaos));
+        registerEffect(new NightVisionEffect(chaos));
+        registerEffect(new NothingEffect());
+        registerEffect(new WhereDidEverybodyGoEffect(chaos));
+        registerEffect(new ClearPotionEffectsEffect());
+        registerEffect(new LaunchPlayerEffect());
+        registerEffect(new WeaponGiverEffect());
+        registerEffect(new InvulnerablePlayerEffect());
+        registerEffect(new SpawnRandomAnimalsEffect());
+        registerEffect(new SetCurrentVehicleEffect());
+        registerEffect(new KillerBunnyEffect());
+        registerEffect(new HeresJohnnyEffect());
+        registerEffect(new VampirismEffect(chaos));
+        registerEffect(new AllPlayersExitVehicleEffect());
+        registerEffect(new InvulnerableEntitiesEffect());
+        registerEffect(new InvisibleEntitiesEffect());
+        InvisibleEntitiesEffect invisibleEntitiesEffect = new InvisibleEntitiesEffect();
+        Bukkit.getPluginManager().registerEvents(invisibleEntitiesEffect, chaos);
+        registerEffect(invisibleEntitiesEffect);
+        registerEffect(new LaunchAllEntitiesEffect());
+        registerEffect(new DemoScreenEffect());
+        registerEffect(new OpenRandomInventoryEffect());
+        registerEffect(new KickEffect());
+        registerEffect(new AdventureEffect());
+        registerEffect(new DogLoverEffect());
+        registerEffect(new WingManEffect());
+        registerEffect(new StarterPackEffect());
+        registerEffect(new DamageItemsEffect());
+        registerEffect(new MysteryEffect(chaos));
+    }
 
-  private void registerEffect(Effect effect) {
-    effectManager.addEffect(effect);
-  }
+    private void registerEffect(Effect effect) {
+        effectManager.addEffect(effect);
+    }
 
 }

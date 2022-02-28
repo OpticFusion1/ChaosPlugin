@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 
 public class NiceExpEffect extends Effect {
 
-  public NiceExpEffect() {
-    super("Nice Exp");
-  }
+    public NiceExpEffect() {
+        super("Nice Exp");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.setLevel(69);
-  }
+    @Override
+    public void activate(Player player) {
+        player.setLevel(69);
+    }
 
 }

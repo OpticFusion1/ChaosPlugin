@@ -8,13 +8,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class GiveDiamondEffect extends Effect {
 
-  public GiveDiamondEffect() {
-    super("Give Diamond");
-  }
+    public GiveDiamondEffect() {
+        super("Give Diamond");
+    }
 
-  @Override
-  public void activate(Player player) {
-    Utils.addItems(player, new ItemStack[]{new ItemStack(Material.DIAMOND)});
-  }
+    @Override
+    public void activate(Player player) {
+        Utils.addItems(player, new ItemStack[]{new ItemStack(Material.DIAMOND)});
+    }
 
 }

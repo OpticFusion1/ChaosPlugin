@@ -6,21 +6,21 @@ import org.bukkit.entity.Player;
 
 public class VampirismEffect extends TimedEffect {
 
-  private ChaosPlugin chaos;
-  
-  public VampirismEffect(ChaosPlugin chaos) {
-    super("Vampirism");
-    this.chaos = chaos;
-  }
+    private ChaosPlugin chaos;
 
-  @Override
-  public void deactivate(Player player) {
-    chaos.removeFromActiveVampirism(player);
-  }
+    public VampirismEffect(ChaosPlugin chaos) {
+        super("Vampirism");
+        this.chaos = chaos;
+    }
 
-  @Override
-  public void activate(Player player) {
-    chaos.addToActiveVampirism(player);
-  }
+    @Override
+    public void deactivate(Player player) {
+        chaos.removeFromActiveVampirism(player);
+    }
+
+    @Override
+    public void activate(Player player) {
+        chaos.addToActiveVampirism(player);
+    }
 
 }

@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 
 public class FullHealthEffect extends Effect {
 
-  public FullHealthEffect() {
-    super("Full Health");
-  }
+    public FullHealthEffect() {
+        super("Full Health");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.setHealth(20.0);
-  }
+    @Override
+    public void activate(Player player) {
+        player.setHealth(20.0);
+    }
 
 }

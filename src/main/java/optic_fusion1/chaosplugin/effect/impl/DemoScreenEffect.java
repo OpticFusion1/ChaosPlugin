@@ -5,13 +5,13 @@ import org.bukkit.entity.Player;
 
 public class DemoScreenEffect extends Effect {
 
-  public DemoScreenEffect() {
-    super("Demo Screen");
-  }
+    public DemoScreenEffect() {
+        super("Demo Screen");
+    }
 
-  @Override
-  public void activate(Player player) {
-    player.showDemoScreen();
-  }
+    @Override
+    public void activate(Player player) {
+        player.showDemoScreen();
+    }
 
 }

@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 
 public class SkyLavaEffect extends Effect {
 
-  public SkyLavaEffect() {
-    super("SkyLava");
-  }
+    public SkyLavaEffect() {
+        super("SkyLava");
+    }
 
-  @Override
-  public void activate(Player player) {
-    new Location(player.getWorld(), player.getLocation().getX(), 255.0, player.getLocation().getZ())
-            .getBlock().setType(Material.LAVA);
-  }
+    @Override
+    public void activate(Player player) {
+        new Location(player.getWorld(), player.getLocation().getX(), 255.0, player.getLocation().getZ())
+                .getBlock().setType(Material.LAVA);
+    }
 
 }

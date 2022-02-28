@@ -6,8 +6,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class JumpBoostEffect extends PotionEffectEffect {
 
-  public JumpBoostEffect(ChaosPlugin chaos) {
-    super("Jump Boost", new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 50), chaos);
-  }
+    public JumpBoostEffect(ChaosPlugin chaos) {
+        super("Jump Boost", new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 50), chaos);
+    }
 
 }

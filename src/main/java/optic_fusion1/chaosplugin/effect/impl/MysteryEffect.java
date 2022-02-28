@@ -6,16 +6,16 @@ import org.bukkit.entity.Player;
 
 public class MysteryEffect extends Effect {
 
-  private ChaosPlugin chaos;
+    private ChaosPlugin chaos;
 
-  public MysteryEffect(ChaosPlugin chaos) {
-    super("Mystery Effect");
-    this.chaos = chaos;
-  }
+    public MysteryEffect(ChaosPlugin chaos) {
+        super("Mystery Effect");
+        this.chaos = chaos;
+    }
 
-  @Override
-  public void activate(Player player) {
-    chaos.runRandomEffect(player, true);
-  }
+    @Override
+    public void activate(Player player) {
+        chaos.runRandomEffect(player, true);
+    }
 
 }

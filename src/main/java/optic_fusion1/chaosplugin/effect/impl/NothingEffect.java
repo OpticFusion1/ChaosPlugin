@@ -5,12 +5,12 @@ import org.bukkit.entity.Player;
 
 public class NothingEffect extends Effect {
 
-  public NothingEffect() {
-    super("Nothing");
-  }
+    public NothingEffect() {
+        super("Nothing");
+    }
 
-  @Override
-  public void activate(Player player) {
-  }
+    @Override
+    public void activate(Player player) {
+    }
 
 }

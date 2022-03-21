@@ -3,6 +3,7 @@ package optic_fusion1.chaosplugin.effect.impl;
 import java.util.EnumSet;
 import java.util.Random;
 import optic_fusion1.chaosplugin.effect.Effect;
+import optic_fusion1.chaosplugin.util.CollectionUtils;
 import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
@@ -35,7 +36,7 @@ public class SpawnRandomAnimalsEffect extends Effect {
         for (int i = 0; i <= 10; i++) {
             Location location = Utils.getLocationInCircle(player.getLocation(), 10);
             location.setY(location.getWorld().getHighestBlockYAt(location) + 1);
-            EntityType entityType = Utils.getRandomSetElement(ENTITY_TYPES);
+            EntityType entityType = CollectionUtils.getRandomSetElement(ENTITY_TYPES);
             LivingEntity entity = (LivingEntity) location.getWorld().spawnEntity(location, entityType);
             if (entity instanceof Ageable ageable) {
                 randomizeAge(ageable);

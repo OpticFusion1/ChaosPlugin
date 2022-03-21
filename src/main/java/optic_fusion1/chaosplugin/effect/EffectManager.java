@@ -7,12 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import optic_fusion1.chaosplugin.ChaosPlugin;
-import optic_fusion1.chaosplugin.util.Utils;
+import optic_fusion1.chaosplugin.util.CollectionUtils;
 
 public class EffectManager {
 
     private static final HashMap<String, Effect> ALL_EFFECTS = new HashMap<>();
     private static final HashMap<String, Effect> ENABLED_EFFECTS = new HashMap<>();
+    private static final HashMap<String, TimedEffect> TIMED_EFFECTS = new HashMap<>();
     private List<String> disabledEffects = new ArrayList<>();
 
     public EffectManager(ChaosPlugin chaos) {
@@ -43,11 +44,11 @@ public class EffectManager {
     }
 
     public Optional<Effect> getRandomEffect() {
-        return Utils.getRandomCollectionElement(ALL_EFFECTS.values());
+        return CollectionUtils.getRandomCollectionElement(ALL_EFFECTS.values());
     }
 
     public Optional<Effect> getRandomEnabledEffect() {
-        return Utils.getRandomCollectionElement(ENABLED_EFFECTS.values());
+        return CollectionUtils.getRandomCollectionElement(ENABLED_EFFECTS.values());
     }
 
 }

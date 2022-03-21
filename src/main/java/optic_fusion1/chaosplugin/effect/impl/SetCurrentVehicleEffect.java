@@ -3,6 +3,7 @@ package optic_fusion1.chaosplugin.effect.impl;
 import java.util.EnumSet;
 import java.util.Random;
 import optic_fusion1.chaosplugin.effect.Effect;
+import optic_fusion1.chaosplugin.util.CollectionUtils;
 import optic_fusion1.chaosplugin.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
@@ -25,7 +26,7 @@ public class SetCurrentVehicleEffect extends Effect {
 
     @Override
     public void activate(Player player) {
-        EntityType entityType = Utils.getRandomSetElement(VEHICLES);
+        EntityType entityType = CollectionUtils.getRandomSetElement(VEHICLES);
         Entity entity = (Entity) player.getWorld().spawnEntity(player.getLocation(), entityType);
         if (player.isInsideVehicle()) {
             player.eject();

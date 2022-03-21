@@ -31,24 +31,6 @@ public final class Utils {
         return string;
     }
 
-//  public static void dropItemNaturally(Location location, Material material) {
-//    location.getWorld().dropItemNaturally(location, new ItemStack(material));
-//  }
-//
-//  public static void dropItemNaturally(Location location, ItemStack... itemStacks) {
-//    World world = location.getWorld();
-//    for (ItemStack itemStack : itemStacks) {
-//      world.dropItemNaturally(location, itemStack);
-//    }
-//  }
-    public static <E> Optional<E> getRandomCollectionElement(Collection<E> e) {
-        return e.stream().skip((int) (e.size() * Math.random())).findFirst();
-    }
-
-    public static <E> E getRandomSetElement(Set<E> set) {
-        return set.stream().skip(new Random().nextInt(set.size())).findFirst().orElse(null);
-    }
-
     public static Location getLocationInCircle(Location origin, Integer radius) {
         double angle = random() * 360;
         return origin.add(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);

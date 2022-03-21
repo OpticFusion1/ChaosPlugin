@@ -42,7 +42,7 @@ public class ChaosPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // TODO: Implement proper Effect Life-Cycle
+        // TODO: Implement proper Effect Life-Cycle. Any timed effect should be turned off if the plugin gets disabled.
         InvulnerableEntitiesEffect.disable();
     }
 

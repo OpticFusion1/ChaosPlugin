@@ -35,6 +35,7 @@ import optic_fusion1.chaosplugin.effect.impl.MysteryEffect;
 import optic_fusion1.chaosplugin.effect.impl.NiceExpEffect;
 import optic_fusion1.chaosplugin.effect.impl.NothingEffect;
 import optic_fusion1.chaosplugin.effect.impl.OpenRandomInventoryEffect;
+import optic_fusion1.chaosplugin.effect.impl.PumpkinHatEffect;
 import optic_fusion1.chaosplugin.effect.impl.SetCurrentVehicleEffect;
 import optic_fusion1.chaosplugin.effect.impl.SkyLavaEffect;
 import optic_fusion1.chaosplugin.effect.impl.SpawnRandomAnimalsEffect;
@@ -125,6 +126,7 @@ public class EffectRegistery {
         registerEffect(new StarterPackEffect());
         registerEffect(new DamageItemsEffect());
         registerEffect(new MysteryEffect(chaos));
+        registerEffect(new PumpkinHatEffect());
     }
 
     private void registerEffect(Effect effect) {
